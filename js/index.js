@@ -37,6 +37,8 @@
     }
   };
 
+  var domEvents;
+
   function createMoon(textureMap, normalMap) {
     var radius = 100;
     var xSegments = 50;
@@ -110,11 +112,14 @@
     scene.add(cube);
     */
     for (var i=0; i < LUNAR_DATA.length; i++) {
-    var datum = LUNAR_DATA[i];
-    var vec3 = latLongToVector3(datum.x, datum.y, 100, 0);
-    var cube = new THREE.Mesh( new THREE.CubeGeometry(2,2,2), new THREE.MeshNormalMaterial({wireframe: true}) );
-    cube.position = vec3;
-    scene.add(cube);
+      var datum = LUNAR_DATA[i];
+      var vec3 = latLongToVector3(datum.x, datum.y, 100, 0);
+      var cube = new THREE.Mesh( new THREE.CubeGeometry(2,2,2), new THREE.MeshNormalMaterial({wireframe: true}) );
+      domEvents.addEventListener(cube, 'click', function(e) {
+        console.log(datum);
+      }, false);
+      cube.position = vec3;
+      scene.add(cube);
     }
   }
 
@@ -173,6 +178,7 @@
     */
 
     clock = new THREE.Clock();
+    domEvents = new THREEx.DomEvents(camera, renderer.domElement)
   }
 
   function animate() {
@@ -182,6 +188,12 @@
     controls.update(camera);
     //stats.update();
     renderer.render(scene, camera);
+
+    findIntersections();
+  }
+
+  function findIntersections() {
+
   }
 
   function toggleHud() {
@@ -295,16 +307,10 @@
     init();
   }
 
-  function onDocumentMouseMove(event) {
-    mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-    mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-  }
-
   /** Window load event kicks off execution */
   window.addEventListener('load', onWindowLoaded, false);
   window.addEventListener('resize', onWindowResize, false);
   //document.addEventListener('keydown', onDocumentKeyDown, false);
-  window.addEventListener( 'mousemove', onDocumentMouseMove, false );
 })();
 
   // convert the positions from a lat, lon to a position on a sphere.
