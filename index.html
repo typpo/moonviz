@@ -1,0 +1,115 @@
+﻿<!doctype html>
+<html>
+<head>
+
+  <title>WebGL Moon Demo</title>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+  <meta name="description" content="Photorealistic 3D Moon Demo in WebGL using satellite imagery." />
+
+  <!-- Allow fullscreen app install in Android and IOS respectively -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+  <!-- Import external stylesheets -->
+  <link type="text/css" href="css/main.css" rel="stylesheet" />
+
+</head>
+<body>
+
+  <!-- Three.JS Container DOM Element -->
+  <div id="container"></div>
+
+  <!-- Overlay HUD -->
+  <div id="hud">
+<!--
+    <div class="hud-panel top-right">
+      <a href="http://github.com/CoryG89/MoonDemo">WebGL Moon Demo</a> (Three.JS)
+      <br />Created by <a href="http://coryg89.github.io/">Cory Gross</a>
+    </div>
+    <div class="hud-panel bottom-right">
+      <em>h</em> to toggle HUD
+      <br /><em>p</em> for screenshot
+      <br /><em>f</em> for fullscreen
+    </div>
+-->
+    <div class="hud-panel center"></div>
+  </div>
+
+  <div id="loading-container">
+    <h2>Loading Assets</h2>
+    <p id="loading-message"></p>
+  </div>
+
+  <!-- GLSL vertex shader for the moon -->
+  <script id="norm-vert-shader" type="x-shader/x-vertex">
+    attribute vec4 tangent;
+
+    uniform vec2 uvScale;
+    uniform vec3 lightPosition;
+
+    varying vec2 vUv;
+    varying mat3 tbn;
+    varying vec3 vLightVector;
+
+    void main() {
+        vUv = uvScale * uv;
+
+        /** Create tangent-binormal-normal matrix used to transform
+            coordinates from object space to tangent space */
+        vec3 vNormal = normalize(normalMatrix * normal);
+        vec3 vTangent = normalize( normalMatrix * tangent.xyz );
+        vec3 vBinormal = normalize(cross( vNormal, vTangent ) * tangent.w);
+        tbn = mat3(vTangent, vBinormal, vNormal);
+
+        /** Calculate the vertex-to-light vector */
+        vec4 lightVector = viewMatrix * vec4(lightPosition, 1.0);
+        vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
+        vLightVector = normalize(lightVector.xyz - modelViewPosition.xyz);
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  </script>
+
+  <!-- GLSL fragment shader for the moon -->
+  <script id="norm-frag-shader" type="x-shader/x-fragment">
+    uniform sampler2D textureMap;
+    uniform sampler2D normalMap;
+
+    varying vec2 vUv;
+    varying mat3 tbn;
+    varying vec3 vLightVector;
+
+    void main() {
+        /** Transform texture coordinate of normal map to a range (-1, 1) */
+        vec3 normalCoordinate = texture2D(normalMap, vUv).xyz * 2.0 - 1.0;
+
+        /** Transform the normal vector in the RGB channels to tangent space */
+        vec3 normal = normalize(tbn * normalCoordinate.rgb);
+
+        /** Lighting intensity is calculated as dot of normal vector and
+            the vertex-to-light vector */
+        float intensity = max(0.07, dot(normal, vLightVector));
+        vec4 lighting = vec4(intensity, intensity, intensity, 1.0);
+
+        /** Final color is calculated with the lighting applied */
+        gl_FragColor = texture2D(textureMap, vUv) * lighting;
+    }
+  </script>
+
+  <!-- Include vendor scripts -->
+  <script type="text/javascript" src="vendor/three.min.js"></script>
+  <script type="text/javascript" src="vendor/TrackballControls.js"></script>
+  <script type="text/javascript" src="vendor/detector.min.js"></script>
+  <script type="text/javascript" src="vendor/stats.min.js"></script>
+  <script type="text/javascript" src="vendor/screenfull.min.js"></script>
+
+  <!-- Include Three.JS scene controller script -->
+  <script type="text/javascript" src="js/index.js"></script>
+
+  <noscript>
+    <p>You need javascript enabled in order to use this web application.</p>
+  </noscript>
+</body>
+</html>
