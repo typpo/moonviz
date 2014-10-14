@@ -77,6 +77,7 @@
     }
 
     function createObjects() {
+      /*
       // crater
       var vec3;
       vec3 = latLongToVector3(-0.7, -5.9, 100, 0);
@@ -107,6 +108,14 @@
       var cube = new THREE.Mesh( new THREE.CubeGeometry(2,2,2), new THREE.MeshNormalMaterial({wireframe: true}) );
       cube.position = vec3;
       scene.add(cube);
+      */
+      for (var i=0; i < LUNAR_DATA.length; i++) {
+        var datum = LUNAR_DATA[i];
+        var vec3 = latLongToVector3(datum.x, datum.y, 100, 0);
+        var cube = new THREE.Mesh( new THREE.CubeGeometry(2,2,2), new THREE.MeshNormalMaterial({wireframe: true}) );
+        cube.position = vec3;
+        scene.add(cube);
+      }
     }
 
     function createSkybox(texture) {
