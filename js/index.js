@@ -112,14 +112,19 @@
     scene.add(cube);
     */
     for (var i=0; i < LUNAR_DATA.length; i++) {
-      var datum = LUNAR_DATA[i];
-      var vec3 = latLongToVector3(datum.x, datum.y, 100, 0);
-      var cube = new THREE.Mesh( new THREE.CubeGeometry(2,2,2), new THREE.MeshNormalMaterial({wireframe: true}) );
-      domEvents.addEventListener(cube, 'click', function(e) {
-        console.log(datum);
-      }, false);
-      cube.position = vec3;
-      scene.add(cube);
+      (function() {
+        var datum = LUNAR_DATA[i];
+        var vec3 = latLongToVector3(datum.y, datum.x, 100, 0);
+        var cube = new THREE.Mesh( new THREE.CubeGeometry(2,2,2), new THREE.MeshBasicMaterial({wireframe: true}) );
+        domEvents.addEventListener(cube, 'click', function(e) {
+          console.log(datum);
+        }, false);
+        domEvents.addEventListener(cube, 'mouseover', function(e) {
+          document.getElementById('center-hud').innerHTML = datum.name;
+        }, false);
+        cube.position = vec3;
+        scene.add(cube);
+      })();
     }
   }
 
@@ -292,7 +297,7 @@
         loadingContainer.style.display = 'block';
       },
       onProgress: function (evt) {
-        loadingMessage.innerHTML = evt.name;
+        //loadingMessage.innerHTML = evt.name;
       },
       onComplete: function (evt) {
         loadingContainer.style.display = 'none';

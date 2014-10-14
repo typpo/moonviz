@@ -58,3 +58,10 @@ div#loading-container {
     text-align: center;
     display: none;
 }
+
+#center-hud {
+  bottom: 0;
+  font-family: Helvetica, Arial;
+  font-weight: bold;
+  font-size: 30px;
+}
