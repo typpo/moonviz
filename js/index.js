@@ -71,7 +71,7 @@
         mesh.position.set(0, 0, 0);
         // Hardcoded adjustments to match coordinate system of image map with
         // actual coordinate system.
-        mesh.rotation.set(Math.PI*-2/200, Math.PI*298/200, 0);
+        mesh.rotation.set(0, Math.PI*299.9/200, 0);
         scene.add(mesh);
         return mesh;
     }
