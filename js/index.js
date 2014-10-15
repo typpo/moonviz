@@ -38,6 +38,7 @@
   };
 
   var domEvents;
+  var uniforms;
 
   function createMoon(textureMap, normalMap) {
     var radius = 100;
@@ -79,38 +80,6 @@
   }
 
   function createObjects() {
-    /*
-    // crater
-    var vec3;
-    vec3 = latLongToVector3(-0.7, -5.9, 100, 0);
-    var cube = new THREE.Mesh( new THREE.CubeGeometry(2,2,2), new THREE.MeshNormalMaterial({wireframe: true}) );
-    cube.position = vec3;
-    scene.add(cube);
-
-    // 0,0
-    vec3 = latLongToVector3(0, 0, 100, 0);
-    var cube = new THREE.Mesh( new THREE.CubeGeometry(2,2,2), new THREE.MeshNormalMaterial({wireframe: true}) );
-    cube.position = vec3;
-    scene.add(cube);
-
-    // apollo 11
-    vec3 = latLongToVector3(0.67408, 23.47297, 100, 0);
-    var cube = new THREE.Mesh( new THREE.CubeGeometry(2,2,2), new THREE.MeshNormalMaterial({wireframe: true}) );
-    cube.position = vec3;
-    scene.add(cube);
-
-    // apollo 12
-    vec3 = latLongToVector3(-3.012389, -23.421569, 100, 0);
-    var cube = new THREE.Mesh( new THREE.CubeGeometry(2,2,2), new THREE.MeshNormalMaterial({wireframe: true}) );
-    cube.position = vec3;
-    scene.add(cube);
-
-    // apollo 14
-    vec3 = latLongToVector3(-3.6453, -17.471361, 100, 0);
-    var cube = new THREE.Mesh( new THREE.CubeGeometry(2,2,2), new THREE.MeshNormalMaterial({wireframe: true}) );
-    cube.position = vec3;
-    scene.add(cube);
-    */
     for (var i=0; i < LUNAR_DATA.length; i++) {
       (function() {
         var datum = LUNAR_DATA[i];
@@ -124,8 +93,17 @@
         domEvents.addEventListener(cube, 'click', function(e) {
           console.log(datum);
         }, false);
+        var mouseTimeout = null;
         domEvents.addEventListener(cube, 'mouseover', function(e) {
+          if (mouseTimeout) {
+            clearTimeout(mouseTimeout);
+          }
           document.getElementById('center-hud').innerHTML = datum.name;
+        }, false);
+        domEvents.addEventListener(cube, 'mouseout', function(e) {
+          mouseTimeout = setTimeout(function() {
+            document.getElementById('center-hud').innerHTML = '';
+          }, 1000);
         }, false);
         cube.position = vec3;
         scene.add(cube);
@@ -153,6 +131,87 @@
     scene.add(mesh);
 
     return mesh;
+  }
+
+ function createParticleSystem() {
+    var attributes = {
+      a: { type: 'f', value: [] },
+      e: { type: 'f', value: [] },
+      i: { type: 'f', value: [] },
+      o: { type: 'f', value: [] },
+      ma: { type: 'f', value: [] },
+      n: { type: 'f', value: [] },
+      w: { type: 'f', value: [] },
+      P: { type: 'f', value: [] },
+      epoch: { type: 'f', value: [] },
+
+      size: { type: 'f', value: [] },
+      value_color : { type: 'c', value: [] },
+    };
+
+    uniforms = {
+      color: { type: 'c', value: new THREE.Color( 0xffffff ) },
+      jed: { type: 'f', value: 2451545.0 },
+      small_roid_texture:
+        { type: 't', value: loadTexture('img/cloud4.png') },
+    };
+
+    var vertexshader = document.getElementById('orbit-vertex-shader').textContent
+                          .replace('{{PIXELS_PER_AU}}', 200.0); // moon radius x 2
+
+    var particle_system_shader_material = new THREE.ShaderMaterial( {
+      uniforms:       uniforms,
+      attributes:     attributes,
+      vertexShader:   vertexshader,
+      fragmentShader: document.getElementById('orbit-fragment-shader').textContent
+    });
+    particle_system_shader_material.depthTest = true;
+    particle_system_shader_material.vertexColor = true;
+    particle_system_shader_material.transparent = true;
+    particle_system_shader_material.blending = THREE.AdditiveBlending;
+
+    var added_objects = [
+      {
+        full_name: 'foo',
+        ma: -2.47311027,
+        epoch: 2451545.0,
+        a: 3,
+        e: 0.01671123,
+        i: 0.00001531,
+        w_bar: 102.93768193,
+        w: 102.93768193,
+        L: 100.46457166,
+        om: 0,
+        P: 365.256
+      }
+    ];
+
+    var particle_system_geometry = new THREE.Geometry();
+    for (var i = 0; i < added_objects.length; i++) {
+      attributes.size.value[i] = 50;
+
+      attributes.a.value[i] = added_objects[i].a;
+      attributes.e.value[i] = added_objects[i].e;
+      attributes.i.value[i] = added_objects[i].i;
+      attributes.o.value[i] = added_objects[i].om;
+      attributes.ma.value[i] = added_objects[i].ma;
+      attributes.n.value[i] = added_objects[i].n || -1.0;
+      attributes.w.value[i] = added_objects[i].w_bar
+        || (added_objects[i].w + added_objects[i].om);
+      attributes.P.value[i] = added_objects[i].P || -1.0;
+      attributes.epoch.value[i] = added_objects[i].epoch;
+      attributes.value_color.value[i] = new THREE.Color(0x00ff00);
+      particle_system_geometry.vertices.push(new THREE.Vector3(0, 0, 0));
+    }  // end added_objects loop
+
+    var particleSystem = new THREE.ParticleSystem(
+      particle_system_geometry,
+      particle_system_shader_material
+    );
+    window.ps = particleSystem;
+
+    // add it to the scene
+    scene.add(particleSystem);
   }
 
   function init() {
@@ -199,11 +258,8 @@
     //stats.update();
     renderer.render(scene, camera);
 
-    findIntersections();
-  }
-
-  function findIntersections() {
-
+    // jed
+    uniforms.jed.value += 0.25;
   }
 
   function toggleHud() {
@@ -310,6 +366,7 @@
         moon = createMoon(textures.moon, textures.moonNormal);
         starfield = createSkybox(textures.starfield);
         createObjects();
+        createParticleSystem();
         animate();
       }
     });
@@ -323,14 +380,30 @@
   //document.addEventListener('keydown', onDocumentKeyDown, false);
 })();
 
-  // convert the positions from a lat, lon to a position on a sphere.
-  function latLongToVector3(lat, lon, radius, height) {
-    var phi = (lat)*Math.PI/180;
-    var theta = (lon+90)*Math.PI/180;
+// convert the positions from a lat, lon to a position on a sphere.
+function latLongToVector3(lat, lon, radius, height) {
+  var phi = (lat)*Math.PI/180;
+  var theta = (lon+90)*Math.PI/180;
 
-    var x = -(radius+height) * Math.cos(phi) * Math.cos(theta);
-    var y = (radius+height) * Math.sin(phi);
-    var z = (radius+height) * Math.cos(phi) * Math.sin(theta);
+  var x = -(radius+height) * Math.cos(phi) * Math.cos(theta);
+  var y = (radius+height) * Math.sin(phi);
+  var z = (radius+height) * Math.cos(phi) * Math.sin(theta);
 
-    return new THREE.Vector3(x,y,z);
+  return new THREE.Vector3(x,y,z);
+}
+
+function loadTexture(path) {
+  if (typeof passthrough_vars !== 'undefined' && passthrough_vars.offline_mode) {
+    // same origin policy workaround
+    var b64_data = $('img[data-src="' + path + '"]').attr('src');
+
+    var new_image = document.createElement( 'img' );
+    var texture = new THREE.Texture( new_image );
+    new_image.onload = function()  {
+      texture.needsUpdate = true;
+    };
+    new_image.src = b64_data;
+    return texture;
   }
+  return THREE.ImageUtils.loadTexture(path);
+}
