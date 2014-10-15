@@ -114,8 +114,13 @@
     for (var i=0; i < LUNAR_DATA.length; i++) {
       (function() {
         var datum = LUNAR_DATA[i];
-        var vec3 = latLongToVector3(datum.y, datum.x, 100, 0);
-        var cube = new THREE.Mesh( new THREE.CubeGeometry(2,2,2), new THREE.MeshBasicMaterial({wireframe: true}) );
+        var vec3 = latLongToVector3(datum.y, datum.x, 100, 1);
+        var cube = new THREE.Mesh( new THREE.SphereGeometry(1,64,64), new THREE.MeshBasicMaterial({color: 0xffff00}) );
+        /*
+        var geom = new THREE.CircleGeometry(1, 64);
+        geom.vertices.shift();  // remove center vertex
+        var cube = new THREE.Line(geom, new THREE.LineBasicMaterial({color: 0xffff00 }));
+       */
         domEvents.addEventListener(cube, 'click', function(e) {
           console.log(datum);
         }, false);
