@@ -105,6 +105,9 @@
           document.getElementById('center-hud').innerHTML = datum.name;
         }, false);
         domEvents.addEventListener(cube, 'mouseout', function(e) {
+          if (mouseTimeout) {
+            clearTimeout(mouseTimeout);
+          }
           mouseTimeout = setTimeout(function() {
             document.getElementById('center-hud').innerHTML = '';
           }, 1000);
@@ -194,7 +197,6 @@
       attributes.value_color.value[i] = new THREE.Color(0xffffff);
       particle_system_geometry.vertices.push(new THREE.Vector3(0, 0, 0));
     }  // end added_objects loop
-    console.log(attributes);
 
     var particleSystem = new THREE.ParticleSystem(
       particle_system_geometry,
@@ -204,7 +206,7 @@
     window.ps = particleSystem;
 
     // add it to the scene
-    scene.add(particleSystem);
+    //scene.add(particleSystem);
   }
 
   function init() {
@@ -247,8 +249,8 @@
 
   function animate() {
     requestAnimationFrame(animate);
-    light.orbit(moon.position, clock.getElapsedTime());
-    //light.orbit(moon.position, 0);
+    //light.orbit(moon.position, clock.getElapsedTime());
+    light.orbit(moon.position, 0);
     controls.update(camera);
     //stats.update();
     renderer.render(scene, camera);
