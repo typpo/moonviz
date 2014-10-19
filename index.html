@@ -132,7 +132,7 @@
         float E1 = M + e * sin(E0);
         float lastdiff = abs(E1-E0);
         E0 = E1;
-        for (int foo=0; foo < 25; foo++) {
+        for (int iter=0; iter < 5; iter++) {
           E1 = M + e * sin(E0);
           lastdiff = abs(E1-E0);
           E0 = E1;
