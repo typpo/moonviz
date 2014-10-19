@@ -214,6 +214,7 @@
   }
 
   function createGui() {
+    return; // disabled for now.
     var gui = new dat.GUI();
     var uiOptions = {
       'Min Year': 1950,
