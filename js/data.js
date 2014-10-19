@@ -1,41 +1,224 @@
 var LUNAR_DATA = [
-{'name':'Luna 2','type':'XX','brief':'The first spacecraft to reach the surface of the Moon.','desc':'The Soviet Union\'s <a target="new" href="http://en.wikipedia.org/wiki/Luna_2">Luna 2</a> spacecraft successfully crash-landed into the Moon on September 14, 1959, having taken a variety of measurements <i>en route</i>.','diam':null,'x':0,'y':29.1,'all':'Luna 2#The Soviet Union\'s <a target="new" href="http://en.wikipedia.org/wiki/Luna_2">Luna 2</a> spacecraft successfully crash-landed into the Moon on September 14, 1959, having taken a variety of measurements <i>en route</i>.The first spacecraft to reach the surface of the Moon.'},
-{'name':'Ranger 4','type':'XX','brief':'The first American spacecraft to reach the surface of the Moon.','desc':'The USA\'s <a target="new" href="http://en.wikipedia.org/wiki/Ranger_4">Ranger 4</a> spacecraft successfully crash-landed into the far side of the Moon on April 26, 1962, having taken pictures and made measurements <i>en route</i>.','diam':null,'x':-130.7,'y':-15.52,'all':'Ranger 4#The USA\'s <a target="new" href="http://en.wikipedia.org/wiki/Ranger_4">Ranger 4</a> spacecraft successfully crash-landed into the far side of the Moon on April 26, 1962, having taken pictures and made measurements <i>en route</i>.The first American spacecraft to reach the surface of the Moon.'},
-{'name':'Ranger 6','type':'XX','brief':'An American lunar probe.','desc':'The USA\'s <a target="new" href="http://en.wikipedia.org/wiki/Ranger_6">Ranger 6</a> spacecraft successfully crash-landed into the Moon on January 30, 1964, though it had failed return TV footage <i>en route</i>.','diam':null,'x':21.5,'y':9.4,'all':'Ranger 6#The USA\'s <a target="new" href="http://en.wikipedia.org/wiki/Ranger_6">Ranger 6</a> spacecraft successfully crash-landed into the Moon on January 30, 1964, though it had failed return TV footage <i>en route</i>.An American lunar probe.'},
-{'name':'Ranger 7','type':'XX','brief':'An American lunar probe.','desc':'The USA\'s <a target="new" href="http://en.wikipedia.org/wiki/Ranger_7">Ranger 7</a> spacecraft successfully crash-landed into the Moon on July 31, 1964, having taken over 4000 photographs <i>en route</i>.','diam':null,'x':-20.6,'y':-10.63,'all':'Ranger 7#The USA\'s <a target="new" href="http://en.wikipedia.org/wiki/Ranger_7">Ranger 7</a> spacecraft successfully crash-landed into the Moon on July 31, 1964, having taken over 4000 photographs <i>en route</i>.An American lunar probe.'},
-{'name':'Ranger 8','type':'XX','brief':'An American lunar probe.','desc':'The USA\'s <a target="new" href="http://en.wikipedia.org/wiki/Ranger_8">Ranger 8</a> spacecraft successfully crash-landed into the Moon on February 20, 1965, having taken over 7000 photographs <i>en route</i>.','diam':null,'x':24.61,'y':2.72,'all':'Ranger 8#The USA\'s <a target="new" href="http://en.wikipedia.org/wiki/Ranger_8">Ranger 8</a> spacecraft successfully crash-landed into the Moon on February 20, 1965, having taken over 7000 photographs <i>en route</i>.An American lunar probe.'},
-{'name':'Ranger 9','type':'XX','brief':'An American lunar probe.','desc':'The USA\'s <a target="new" href="http://en.wikipedia.org/wiki/Ranger_9">Ranger 9</a> spacecraft successfully crash-landed into the Moon on March 24, 1965, having taken almost 6000 photographs <i>en route</i>.','diam':null,'x':-2.37,'y':-12.83,'all':'Ranger 9#The USA\'s <a target="new" href="http://en.wikipedia.org/wiki/Ranger_9">Ranger 9</a> spacecraft successfully crash-landed into the Moon on March 24, 1965, having taken almost 6000 photographs <i>en route</i>.An American lunar probe.'},
-{'name':'Luna 5','type':'XX','brief':'A crashed Soviet lunar lander.','desc':'The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_5">Luna 5</a> crashed on the Moon on May 12, 1965, while attempting to land.','diam':null,'x':-8,'y':-31,'all':'Luna 5#The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_5">Luna 5</a> crashed on the Moon on May 12, 1965, while attempting to land.A crashed Soviet lunar lander.'},
-{'name':'Luna 7','type':'XX','brief':'A crashed Soviet lunar lander.','desc':'The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_7">Luna 7</a> crashed on the Moon on October 7, 1965, after losing control during the flight.','diam':null,'x':-47.8,'y':9.8,'all':'Luna 7#The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_7">Luna 7</a> crashed on the Moon on October 7, 1965, after losing control during the flight.A crashed Soviet lunar lander.'},
-{'name':'Luna 8','type':'XX','brief':'A crashed Soviet lunar lander.','desc':'The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_8">Luna 8</a> crashed on the Moon on December 6, 1965, while attempting to land.','diam':null,'x':-62,'y':9.6,'all':'Luna 8#The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_8">Luna 8</a> crashed on the Moon on December 6, 1965, while attempting to land.A crashed Soviet lunar lander.'},
-{'name':'Luna 9','type':'XX','brief':'The first spacecraft to land gently on the Moon.','desc':'The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_9">Luna 9</a> became the first spacecraft to land softly on the Moon on February 3, 1966.','diam':null,'x':-64.37,'y':7.13,'all':'Luna 9#The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_9">Luna 9</a> became the first spacecraft to land softly on the Moon on February 3, 1966.The first spacecraft to land gently on the Moon.'},
-{'name':'Surveyor 1','type':'XX','brief':'The first American spacecraft to land gently on the Moon.','desc':'The unmanned spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Surveyor_1">Surveyor 1</a> became the first American spacecraft to landed softly on the Moon on June 2, 1966.','diam':null,'x':-43.22,'y':-2.45,'all':'Surveyor 1#The unmanned spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Surveyor_1">Surveyor 1</a> became the first American spacecraft to landed softly on the Moon on June 2, 1966.The first American spacecraft to land gently on the Moon.'},
-{'name':'Lunar Orbiter 1','type':'XX','brief':'A crash-landed American lunar orbiter.','desc':'The unmanned spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Lunar_Orbiter_1">Lunar Orbiter 1</a> was an American lunar mapping satellite that was crashed into the far side of the Moon at the end of its mission on October 29, 1966.','diam':null,'x':161,'y':7,'all':'Lunar Orbiter 1#The unmanned spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Lunar_Orbiter_1">Lunar Orbiter 1</a> was an American lunar mapping satellite that was crashed into the far side of the Moon at the end of its mission on October 29, 1966.A crash-landed American lunar orbiter.'},
-{'name':'Surveyor 2','type':'XX','brief':'A crashed American lunar lander.','desc':'The unmanned American spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Surveyor_2">Surveyor 2</a> crashed on the Moon on September 22, 1966, after a mid-course-correction failure.','diam':null,'x':-11,'y':-4,'all':'Surveyor 2#The unmanned American spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Surveyor_2">Surveyor 2</a> crashed on the Moon on September 22, 1966, after a mid-course-correction failure.A crashed American lunar lander.'},
-{'name':'Lunar Orbiter 2','type':'XX','brief':'A crash-landed American lunar orbiter.','desc':'The unmanned spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Lunar_Orbiter_2">Lunar Orbiter 2</a> was an American lunar mapping satellite that was crashed into the far side of the Moon at the end of its mission on October 11, 1967.','diam':null,'x':-119.1,'y':3,'all':'Lunar Orbiter 2#The unmanned spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Lunar_Orbiter_2">Lunar Orbiter 2</a> was an American lunar mapping satellite that was crashed into the far side of the Moon at the end of its mission on October 11, 1967.A crash-landed American lunar orbiter.'},
-{'name':'Luna 13','type':'XX','brief':'A Soviet lunar lander.','desc':'The second unmanned spacecraft of the Soviet Union to land safely on the moon, <a target="new" href="http://en.wikipedia.org/wiki/Luna_13">Luna 13</a> touched down on December 24, 1966, and took several panoramas before its batteries died.','diam':null,'x':62.05,'y':18.866,'all':'Luna 13#The second unmanned spacecraft of the Soviet Union to land safely on the moon, <a target="new" href="http://en.wikipedia.org/wiki/Luna_13">Luna 13</a> touched down on December 24, 1966, and took several panoramas before its batteries died.A Soviet lunar lander.'},
-{'name':'Lunar Orbiter 3','type':'XX','brief':'A crash-landed American lunar orbiter.','desc':'The unmanned spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Lunar_Orbiter_3">Lunar Orbiter 3</a> was an American lunar mapping satellite that was crashed into the far side of the Moon at the end of its mission on October 9, 1967.','diam':null,'x':-97.7,'y':14.3,'all':'Lunar Orbiter 3#The unmanned spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Lunar_Orbiter_3">Lunar Orbiter 3</a> was an American lunar mapping satellite that was crashed into the far side of the Moon at the end of its mission on October 9, 1967.A crash-landed American lunar orbiter.'},
-{'name':'Surveyor 3','type':'XX','brief':'An American lunar lander.','desc':'The second unmanned American spacecraft to land gently on the moon, <a target="new" href="http://en.wikipedia.org/wiki/Surveyor_3">Surveyor 3</a> touched down on April 20, 1967, and conducted several experiments before its batteries died.','diam':null,'x':-23.34,'y':-2.94,'all':'Surveyor 3#The second unmanned American spacecraft to land gently on the moon, <a target="new" href="http://en.wikipedia.org/wiki/Surveyor_3">Surveyor 3</a> touched down on April 20, 1967, and conducted several experiments before its batteries died.An American lunar lander.'},
-{'name':'Lunar Orbiter 4','type':'XX','brief':'A crash-landed American lunar orbiter.','desc':'The unmanned spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Lunar_Orbiter_4">Lunar Orbiter 4</a> was an American lunar mapping satellite that was crashed into the far side of the Moon at the end of its mission on October 31, 1967.  Its exact location is unknown.','diam':null,'x':-26,'y':0,'all':'Lunar Orbiter 4#The unmanned spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Lunar_Orbiter_4">Lunar Orbiter 4</a> was an American lunar mapping satellite that was crashed into the far side of the Moon at the end of its mission on October 31, 1967.  Its exact location is unknown.A crash-landed American lunar orbiter.'},
-{'name':'Surveyor 4','type':'XX','brief':'A crashed American lunar lander.','desc':'The unmanned American spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Surveyor_4">Surveyor 4</a> crashed on the Moon on July 17, 1967, after failing shortly before touchdown.','diam':null,'x':-1.39,'y':0.45,'all':'Surveyor 4#The unmanned American spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Surveyor_4">Surveyor 4</a> crashed on the Moon on July 17, 1967, after failing shortly before touchdown.A crashed American lunar lander.'},
-{'name':'Lunar Orbiter 5','type':'XX','brief':'A crash-landed American lunar orbiter.','desc':'The unmanned spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Lunar_Orbiter_5">Lunar Orbiter 5</a> was an American lunar mapping satellite that was crashed into the far side of the Moon at the end of its mission on January 31, 1968.','diam':null,'x':-83,'y':-2.79,'all':'Lunar Orbiter 5#The unmanned spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Lunar_Orbiter_5">Lunar Orbiter 5</a> was an American lunar mapping satellite that was crashed into the far side of the Moon at the end of its mission on January 31, 1968.A crash-landed American lunar orbiter.'},
-{'name':'Surveyor 5','type':'XX','brief':'An American lunar lander.','desc':'The third unmanned American spacecraft to land gently on the moon, <a target="new" href="http://en.wikipedia.org/wiki/Surveyor_5">Surveyor 5</a> touched down on September 11, 1967, and conducted several experiments before its batteries died.','diam':null,'x':25.25,'y':1.42,'all':'Surveyor 5#The third unmanned American spacecraft to land gently on the moon, <a target="new" href="http://en.wikipedia.org/wiki/Surveyor_5">Surveyor 5</a> touched down on September 11, 1967, and conducted several experiments before its batteries died.An American lunar lander.'},
-{'name':'Surveyor 6','type':'XX','brief':'An American lunar lander.','desc':'The fourth unmanned American spacecraft to land gently on the moon, <a target="new" href="http://en.wikipedia.org/wiki/Surveyor_6">Surveyor 6</a> touched down on November 10, 1967, and conducted several experiments before its batteries died.','diam':null,'x':-1.33,'y':0.42,'all':'Surveyor 6#The fourth unmanned American spacecraft to land gently on the moon, <a target="new" href="http://en.wikipedia.org/wiki/Surveyor_6">Surveyor 6</a> touched down on November 10, 1967, and conducted several experiments before its batteries died.An American lunar lander.'},
-{'name':'Surveyor 7','type':'XX','brief':'An American lunar lander.','desc':'The fifth unmanned American spacecraft to land gently on the moon, <a target="new" href="http://en.wikipedia.org/wiki/Surveyor_7">Surveyor 7</a> touched down on January 11, 1968, and conducted several experiments before its batteries died.','diam':null,'x':-11.43,'y':-40.88,'all':'Surveyor 7#The fifth unmanned American spacecraft to land gently on the moon, <a target="new" href="http://en.wikipedia.org/wiki/Surveyor_7">Surveyor 7</a> touched down on January 11, 1968, and conducted several experiments before its batteries died.An American lunar lander.'},
-{'name':'Luna 15','type':'XX','brief':'A crashed Soviet lunar lander.','desc':'The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_15">Luna 15</a> crashed on the Moon on July 21, 1969, after failing during descent.','diam':null,'x':60,'y':17,'all':'Luna 15#The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_15">Luna 15</a> crashed on the Moon on July 21, 1969, after failing during descent.A crashed Soviet lunar lander.'},
-{'name':'Luna 16','type':'XX','brief':'A Soviet lunar sample return mission.','desc':'The first robotic probe to land on the moon and return a sample to Earth, the Soviet <a target="new" href="http://en.wikipedia.org/wiki/Luna_16">Luna 16</a> landed on September 20, 1970, and lifted off the following day.','diam':null,'x':56.3,'y':-.683,'all':'Luna 16#The first robotic probe to land on the moon and return a sample to Earth, the Soviet <a target="new" href="http://en.wikipedia.org/wiki/Luna_16">Luna 16</a> landed on September 20, 1970, and lifted off the following day.A Soviet lunar sample return mission.'},
-{'name':'Luna 17 / Lunokhod 1','type':'XX','brief':'A Soviet lunar lander and robotic rover.','desc':'The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_17">Luna 17</a> landed on the moon on November 17, 1970, and unloaded the first of two robotic lunar rovers that the Soviet Union sent to the Moon, <a target="new" href="http://en.wikipedia.org/wiki/Lunokhod_1">Lunokhod 1</a>, which operated until September 14, 1971.','diam':null,'x':-35,'y':38.3,'all':'Luna 17 / Lunokhod 1#The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_17">Luna 17</a> landed on the moon on November 17, 1970, and unloaded the first of two robotic lunar rovers that the Soviet Union sent to the Moon, <a target="new" href="http://en.wikipedia.org/wiki/Lunokhod_1">Lunokhod 1</a>, which operated until September 14, 1971.A Soviet lunar lander and robotic rover.'},
-{'name':'Luna 18','type':'XX','brief':'A crashed Soviet lunar lander.','desc':'The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_18">Luna 18</a> crashed on the Moon on September 11, 1971, while attempting to land in the lunar mountains.','diam':null,'x':56.5,'y':3.57,'all':'Luna 18#The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_18">Luna 18</a> crashed on the Moon on September 11, 1971, while attempting to land in the lunar mountains.A crashed Soviet lunar lander.'},
-{'name':'Luna 20','type':'XX','brief':'A Soviet lunar sample return mission.','desc':'The second successful robotic lunar sample return mission by the Soviet Union, <a target="new" href="http://en.wikipedia.org/wiki/Luna_20">Luna 20</a> landed on February 20, 1972, and lifted off the following day.','diam':null,'x':56.55,'y':3.53,'all':'Luna 20#The second successful robotic lunar sample return mission by the Soviet Union, <a target="new" href="http://en.wikipedia.org/wiki/Luna_20">Luna 20</a> landed on February 20, 1972, and lifted off the following day.A Soviet lunar sample return mission.'},
-{'name':'Luna 21 / Lunokhod 2','type':'XX','brief':'A Soviet lunar lander and robotic rover.','desc':'The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_21">Luna 21</a> landed on January 15, 1973, and deployed the second of two Soviet robotic lunar rovers, <a target="new" href="http://en.wikipedia.org/wiki/Lunokhod_2">Lunokhod 2</a>, which operated until June 4, 1973.','diam':null,'x':30.27,'y':25.5,'all':'Luna 21 / Lunokhod 2#The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_21">Luna 21</a> landed on January 15, 1973, and deployed the second of two Soviet robotic lunar rovers, <a target="new" href="http://en.wikipedia.org/wiki/Lunokhod_2">Lunokhod 2</a>, which operated until June 4, 1973.A Soviet lunar lander and robotic rover.'},
-{'name':'Luna 23','type':'XX','brief':'A failed Soviet lunar sample return mission.','desc':'The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_23">Luna 23</a>, designed to return a sample of lunar material to earth, landed on November 6, 1974, but was damaged and unable to return.','diam':null,'x':62,'y':12,'all':'Luna 23#The unmanned Soviet spacecraft <a target="new" href="http://en.wikipedia.org/wiki/Luna_23">Luna 23</a>, designed to return a sample of lunar material to earth, landed on November 6, 1974, but was damaged and unable to return.A failed Soviet lunar sample return mission.'},
-{'name':'Luna 24','type':'XX','brief':'A Soviet lunar sample return mission.','desc':'The third and last successful robotic lunar sample return mission by the Soviet Union, <a target="new" href="http://en.wikipedia.org/wiki/Luna_24">Luna 24</a> landed on August 18, 1976, and lifted off the following day.','diam':null,'x':62.2,'y':12.75,'all':'Luna 24#The third and last successful robotic lunar sample return mission by the Soviet Union, <a target="new" href="http://en.wikipedia.org/wiki/Luna_24">Luna 24</a> landed on August 18, 1976, and lifted off the following day.A Soviet lunar sample return mission.'},
-
-{'name':'Apollo 11','x':23.470721,'y':0.655925,'zoom':0,'desc':'  <div style=\'font-size: 80%; width: 350px; white-space: nowrap\'>\n <div style=\'float: right; width:120px; height: 120px;\'>\n <img src=\'http://mw1.google.com/mw-planetary/lunar/lunarmaps_v1/apollo_thumbs/patches_120x120/apollo-11-patch.jpg\' width=120 height=120>\n </div>\n <span style=\'font-size: 140%; font-weight: bold\'><table><tr><td valign="center"><img src="http://mw1.google.com/mw-planetary/lunar/lunarmaps_v1/util/nasa_small.png"></td><td valign="center">Apollo 11</td></tr></table></span>\n <p>\n <b>Launched:</b> 16 July 1969<br/>\n <b>Landed on Moon:</b> 20 July 1969<br/>\n <b>Landing Site:</b> Mare Tranquillitatis<br/>\n <b>Returned to Earth:</b> 24 July 1969\n </p>\n <p>\n Neil Armstrong, commander<br/>\n Michael Collins, command module pilot<br/>\n Edwin &ldquo;Buzz&rdquo; Aldrin, Jr., lunar module pilot\n </p>\n </div>\n','all':['11','16','1969','20','24','aldrin','apollo','armstrong','buzz','collins','command','commander','earth','edwin','jr','july','landed','landing','launched','ldquo','lunar','mare','michael','module','moon','neil','on','overviews','pilot','rdquo','returned','site','to','tranquillitatis']},
-{'name':'Apollo 12','x':-23.4215746678,'y':-3.00903727405,'zoom':0,'desc':' <div style=\'font-size: 80%; width: 350px; white-space: nowrap\'>\n <div style=\'float: right; width:120px; height: 120px;\'>\n <img src=\'http://mw1.google.com/mw-planetary/lunar/lunarmaps_v1/apollo_thumbs/patches_120x120/apollo-12-patch.jpg\' width=120 height=120>\n </div>\n <span style=\'font-size: 140%; font-weight: bold\'><table><tr><td valign="center"><img src="http://mw1.google.com/mw-planetary/lunar/lunarmaps_v1/util/nasa_small.png"></td><td valign="center">Apollo 12</td></tr></table></span>\n <p>\n <b>Launched:</b> 14 November 1969<br/>\n <b>Landed on Moon:</b> 19 November 1969<br/>\n <b>Landing Site:</b> Oceanus Procellarum<br/>\n <b>Returned to Earth:</b> 24 November 1969<br/>\n\n <p>\n Charles &ldquo;Pete&rdquo; Conrad, Jr., commander<br/>\n Richard Gordon, command module pilot<br/>\n Alan Bean, lunar module pilot\n </p>\n </div>\n','all':['12','14','19','1969','24','alan','apollo','bean','charles','command','commander','conrad','earth','gordon','jr','landed','landing','launched','ldquo','lunar','module','moon','november','oceanus','on','pete','pilot','procellarum','rdquo','returned','richard','site','to']},
-{'name':'Apollo 14','x':-17.5080728653,'y':-3.6006414905,'zoom':0,'desc':'  <div style=\'font-size: 80%; width: 350px; white-space: nowrap\'>\n <div style=\'float: right; width:120px; height: 120px;\'>\n <img src=\'http://mw1.google.com/mw-planetary/lunar/lunarmaps_v1/apollo_thumbs/patches_120x120/apollo-14-patch.jpg\' width=120 height=120>\n </div>\n <span style=\'font-size: 140%; font-weight: bold\'><table><tr><td valign="center"><img src="http://mw1.google.com/mw-planetary/lunar/lunarmaps_v1/util/nasa_small.png"></td><td valign="center">Apollo 14</td></tr></table></span>\n <p>\n <b>Launched:</b> 31 January 1971<br/>\n <b>Landed on Moon:</b> 5 February 1971<br/>\n <b>Landing Site:</b> Fra Mauro<br/>\n <b>Returned to Earth:</b> 9 February 1971<br/>\n\n <p>\n Alan Shepard, commander<br/>\n Stuart Roosa, command module pilot<br/>\n Edgar Mitchell, lunar module pilot\n </p>\n </div>\n','all':['14','1971','31','alan','apollo','command','commander','earth','edgar','february','fra','january','landed','landing','launched','lunar','mauro','mitchell','module','moon','on','pilot','returned','roosa','shepard','site','stuart','to']},
-{'name':'Apollo 15','x':3.6364812593,'y':26.1075606228,'zoom':0,'desc':'  <div style=\'font-size: 80%; width: 350px; white-space: nowrap\'>\n <div style=\'float: right; width:120px; height: 120px;\'>\n <img src=\'http://mw1.google.com/mw-planetary/lunar/lunarmaps_v1/apollo_thumbs/patches_120x120/apollo-15-patch.jpg\' width=120 height=120>\n </div>\n <span style=\'font-size: 140%; font-weight: bold\'><table><tr><td valign="center"><img src="http://mw1.google.com/mw-planetary/lunar/lunarmaps_v1/util/nasa_small.png"></td><td valign="center">Apollo 15</td></tr></table></span>\n <p>\n <b>Launched:</b> 26 July 1971<br/>\n <b>Landed on Moon:</b> 30 July 1971<br/>\n <b>Landing Site:</b> Hadley Rille/Apennines<br/>\n <b>Returned to Earth:</b> 7 August 1971<br/>\n\n <p>\n David Scott, commander<br/>\n Alfred Worden, command module pilot<br/>\n James Irwin, lunar module pilot\n </p>\n </div>\n','all':['15','1971','26','30','alfred','apennines','apollo','august','command','commander','david','earth','hadley','irwin','james','july','landed','landing','launched','lunar','module','moon','on','pilot','returned','rille','scott','site','to','worden']},
-{'name':'Apollo 16','x':15.4835863437,'y':-8.97666787869,'zoom':0,'desc':'  <div style=\'font-size: 80%; width: 350px; white-space: nowrap\'>\n <div style=\'float: right; width:120px; height: 120px;\'>\n <img src=\'http://mw1.google.com/mw-planetary/lunar/lunarmaps_v1/apollo_thumbs/patches_120x120/apollo-16-patch.jpg\' width=120 height=120>\n </div>\n <span style=\'font-size: 140%; font-weight: bold\'><table><tr><td valign="center"><img src="http://mw1.google.com/mw-planetary/lunar/lunarmaps_v1/util/nasa_small.png"></td><td valign="center">Apollo 16</td></tr></table></span>\n <p>\n <b>Launched:</b> 16 April 1972<br/>\n <b>Landed on Moon:</b> 21 April 1972<br/>\n <b>Landing Site:</b> Descartes<br/>\n <b>Returned to Earth:</b> 27 April 1972<br/>\n\n <p>\n John Young, commander<br/>\n Thomas &ldquo;Ken&rdquo; Mattingly, II, command module pilot<br/>\n Charles Duke, Jr., lunar module pilot\n </p>\n </div>\n','all':['16','1972','21','27','apollo','april','charles','command','commander','descartes','duke','earth','ii','john','jr','ken','landed','landing','launched','ldquo','lunar','mattingly','module','moon','on','pilot','rdquo','returned','site','thomas','to','young']},
-{'name':'Apollo 17','x':30.7676066874,'y':20.1743655963,'zoom':0,'desc':' <div style=\'font-size: 80%; width: 350px; white-space: nowrap\'>\n <div style=\'float: right; width:120px; height: 120px;\'>\n <img src=\'http://mw1.google.com/mw-planetary/lunar/lunarmaps_v1/apollo_thumbs/patches_120x120/apollo-17-patch.jpg\' width=120 height=120>\n </div>\n <span style=\'font-size: 140%; font-weight: bold\'><table><tr><td valign="center"><img src="http://mw1.google.com/mw-planetary/lunar/lunarmaps_v1/util/nasa_small.png"></td><td valign="center">Apollo 17</td></tr></table></span>\n <p>\n <b>Launched:</b> 7 December 1972<br/>\n <b>Landed on Moon:</b> 11 December 1972<br/>\n <b>Landing Site:</b> Taurus-Littrow<br/>\n <b>Returned to Earth:</b> 19 December 1972<br/>\n\n <p>\n Eugene Cernan, commander<br/>\n Ronald Evans, command module pilot<br/>\n Harrison &ldquo;Jack&rdquo; Schmitt, lunar module pilot\n </p>\n </div>\n','all':['11','17','19','1972','apollo','cernan','command','commander','december','earth','eugene','evans','harrison','jack','landed','landing','launched','ldquo','littrow','lunar','module','moon','on','pilot','rdquo','returned','ronald','schmitt','site','taurus','to']}
-
+   {
+      "name":"Luna 2",
+      "x":0,
+      "y":29.1,
+      "year": 1959,
+   },
+   {
+      "name":"Ranger 4",
+      "x":-130.7,
+      "y":-15.52
+      "year": 1962,
+   },
+   {
+      "name":"Ranger 6",
+      "x":21.5,
+      "y":9.4
+      "year": 1964,
+   },
+   {
+      "name":"Ranger 7",
+      "x":-20.6,
+      "y":-10.63
+      "year": 1964,
+   },
+   {
+      "name":"Ranger 8",
+      "x":24.61,
+      "y":2.72
+      "year": 1965,
+   },
+   {
+      "name":"Ranger 9",
+      "x":-2.37,
+      "y":-12.83
+      "year": 1965,
+   },
+   {
+      "name":"Luna 5",
+      "x":-8,
+      "y":-31
+      "year": 1965,
+   },
+   {
+      "name":"Luna 7",
+      "x":-47.8,
+      "y":9.8
+      "year": 1965,
+   },
+   {
+      "name":"Luna 8",
+      "x":-62,
+      "y":9.6
+      "year": 1965,
+   },
+   {
+      "name":"Luna 9",
+      "x":-64.37,
+      "y":7.13
+      "year": 1966,
+   },
+   {
+      "name":"Surveyor 1",
+      "x":-43.22,
+      "y":-2.45
+      "year": 1966,
+   },
+   {
+      "name":"Lunar Orbiter 1",
+      "x":161,
+      "y":7
+      "year": 1966,
+   },
+   {
+      "name":"Surveyor 2",
+      "x":-11,
+      "y":-4
+      "year": 1966,
+   },
+   {
+      "name":"Lunar Orbiter 2",
+      "x":-119.1,
+      "y":3
+      "year": 1966,
+   },
+   {
+      "name":"Luna 13",
+      "x":62.05,
+      "y":18.866
+      "year": 1966,
+   },
+   {
+      "name":"Lunar Orbiter 3",
+      "x":-97.7,
+      "y":14.3
+      "year": 1967,
+   },
+   {
+      "name":"Surveyor 3",
+      "x":-23.34,
+      "y":-2.94
+      "year": 1967,
+   },
+   {
+      "name":"Lunar Orbiter 4",
+      "x":-26,
+      "y":0
+      "year": 1967,
+   },
+   {
+      "name":"Surveyor 4",
+      "x":-1.39,
+      "y":0.45
+      "year": 1967,
+   },
+   {
+      "name":"Lunar Orbiter 5",
+      "x":-83,
+      "y":-2.79
+      "year": 1967,
+   },
+   {
+      "name":"Surveyor 5",
+      "x":25.25,
+      "y":1.42
+      "year": 1967,
+   },
+   {
+      "name":"Surveyor 6",
+      "x":-1.33,
+      "y":0.42
+      "year": 1967,
+   },
+   {
+      "name":"Surveyor 7",
+      "x":-11.43,
+      "y":-40.88
+      "year": 1968,
+   },
+   {
+      "name":"Luna 15",
+      "x":60,
+      "y":17
+      "year": 1969,
+   },
+   {
+      "name":"Luna 16",
+      "x":56.3,
+      "y":-0.683
+      "year": 1970,
+   },
+   {
+      "name":"Luna 17 / Lunokhod 1",
+      "x":-35,
+      "y":38.3
+      "year": 1970,
+   },
+   {
+      "name":"Luna 18",
+      "x":56.5,
+      "y":3.57
+      "year": 1971,
+   },
+   {
+      "name":"Luna 20",
+      "x":56.55,
+      "y":3.53
+      "year": 1972,
+   },
+   {
+      "name":"Luna 21 / Lunokhod 2",
+      "x":30.27,
+      "y":25.5
+      "year": 1973,
+   },
+   {
+      "name":"Luna 23",
+      "x":62,
+      "y":12
+      "year": 1974,
+   },
+   {
+      "name":"Luna 24",
+      "x":62.2,
+      "y":12.75
+      "year": 1976,
+   },
+   {
+      "name":"Apollo 11",
+      "x":23.470721,
+      "y":0.655925
+      "year": 1969,
+   },
+   {
+      "name":"Apollo 12",
+      "x":-23.4215746678,
+      "y":-3.00903727405
+      "year": 1969,
+   },
+   {
+      "name":"Apollo 14",
+      "x":-17.5080728653,
+      "y":-3.6006414905
+      "year": 1971,
+   },
+   {
+      "name":"Apollo 15",
+      "x":3.6364812593,
+      "y":26.1075606228
+      "year": 1971,
+   },
+   {
+      "name":"Apollo 16",
+      "x":15.4835863437,
+      "y":-8.97666787869
+      "year": 1972,
+   },
+   {
+      "name":"Apollo 17",
+      "x":30.7676066874,
+      "y":20.1743655963
+      "year": 1972,
+   }
 ];

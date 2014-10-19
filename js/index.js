@@ -213,6 +213,16 @@
     scene.add(particleSystem);
   }
 
+  function createGui() {
+    var gui = new dat.GUI();
+    var uiOptions = {
+      'Min Year': 1950,
+      'Max Year': 2100,
+    };
+    gui.add(uiOptions, 'Min Year', 1950, 2099);
+    gui.add(uiOptions, 'Max Year', 1951, 2100);
+  }
+
   function init() {
     renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -236,7 +246,7 @@
 
     window.cam = camera;
 //
-    controls = new THREE.TrackballControls(camera);
+    controls = new THREE.TrackballControls(camera, renderer.domElement);
     controls.rotateSpeed = 0.5;
     controls.dynamicDampingFactor = 0.5;
 
@@ -368,6 +378,7 @@
         starfield = createSkybox(textures.starfield);
         createObjects();
         createParticleSystem();
+        createGui();
         animate();
       }
     });
