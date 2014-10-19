@@ -170,6 +170,7 @@
       fragmentShader: document.getElementById('orbit-fragment-shader').textContent
     });
     particle_system_shader_material.depthTest = true;
+    particle_system_shader_material.depthWrite = false;
     particle_system_shader_material.vertexColor = true;
     particle_system_shader_material.transparent = true;
     particle_system_shader_material.blending = THREE.AdditiveBlending;
@@ -199,6 +200,7 @@
       particle_system_geometry,
       particle_system_shader_material
     );
+    particleSystem.sortParticles = true;
     window.ps = particleSystem;
 
     // add it to the scene
