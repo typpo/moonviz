@@ -84,7 +84,7 @@
       (function() {
         var datum = LUNAR_DATA[i];
         var vec3 = latLongToVector3(datum.y, datum.x, 100, 1);
-        var material = new THREE.MeshBasicMaterial({color: 0xffff00});
+        var material = new THREE.MeshBasicMaterial({color: 0xFEE5AC});
         //material.depthTest = true;
         //material.depthWrite = true;
         //var geom = new THREE.CircleGeometry(1, 64);
@@ -221,11 +221,13 @@
     var far = 65536;
 
     camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    camera.position.set(0, 0, 800);
+    camera.position.set(0, 0, 980);
 
     scene = new THREE.Scene();
     scene.add(camera);
 
+    window.cam = camera;
+//
     controls = new THREE.TrackballControls(camera);
     controls.rotateSpeed = 0.5;
     controls.dynamicDampingFactor = 0.5;
