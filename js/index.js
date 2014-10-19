@@ -187,7 +187,7 @@
       attributes.ma.value[i] = added_objects[i].ma || 0;
       attributes.n.value[i] = added_objects[i].n || -1.0;
       attributes.w.value[i] = added_objects[i].w_bar ||
-        (added_objects[i].w + added_objects[i].om) || 0;
+        (added_objects[i].w + added_objects[i].om) || Math.random() * 360 - 180;
       attributes.P.value[i] = added_objects[i].p;
       attributes.epoch.value[i] = added_objects[i].epoch || Math.random() * 100000;
       attributes.value_color.value[i] = new THREE.Color(0xffffff);
@@ -243,8 +243,8 @@
 
   function animate() {
     requestAnimationFrame(animate);
-    //light.orbit(moon.position, clock.getElapsedTime());
-    light.orbit(moon.position, 0);
+    light.orbit(moon.position, clock.getElapsedTime());
+    //light.orbit(moon.position, 0);
     controls.update(camera);
     //stats.update();
     renderer.render(scene, camera);
