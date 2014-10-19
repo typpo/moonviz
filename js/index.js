@@ -84,9 +84,13 @@
       (function() {
         var datum = LUNAR_DATA[i];
         var vec3 = latLongToVector3(datum.y, datum.x, 100, 1);
-        var cube = new THREE.Mesh( new THREE.SphereGeometry(1,64,64), new THREE.MeshBasicMaterial({color: 0xffff00}) );
+        var material = new THREE.MeshBasicMaterial({color: 0xffff00});
+        //material.depthTest = true;
+        //material.depthWrite = true;
+        //var geom = new THREE.CircleGeometry(1, 64);
+        var geom =  new THREE.SphereGeometry(1,64,64);
+        var cube = new THREE.Mesh(geom, material);
         /*
-        var geom = new THREE.CircleGeometry(1, 64);
         geom.vertices.shift();  // remove center vertex
         var cube = new THREE.Line(geom, new THREE.LineBasicMaterial({color: 0xffff00 }));
        */
@@ -157,7 +161,7 @@
     };
 
     var vertexshader = document.getElementById('orbit-vertex-shader').textContent
-                          .replace('{{PIXELS_PER_AU}}', 200.0); // moon radius x 2
+                          .replace('{{PIXELS_PER_AU}}', 200.0); // moon diameter
 
     var particle_system_shader_material = new THREE.ShaderMaterial( {
       uniforms:       uniforms,
@@ -170,39 +174,26 @@
     particle_system_shader_material.transparent = true;
     particle_system_shader_material.blending = THREE.AdditiveBlending;
 
-    var added_objects = [
-      {
-        full_name: 'foo',
-        ma: -2.47311027,
-        epoch: 2451545.0,
-        a: 3,
-        e: 0.01671123,
-        i: 0.00001531,
-        w_bar: 102.93768193,
-        w: 102.93768193,
-        L: 100.46457166,
-        om: 0,
-        P: 365.256
-      }
-    ];
+    var added_objects = LUNAR_ORBIT_DATA;
 
     var particle_system_geometry = new THREE.Geometry();
     for (var i = 0; i < added_objects.length; i++) {
-      attributes.size.value[i] = 50;
+      attributes.size.value[i] = 25;
 
-      attributes.a.value[i] = added_objects[i].a;
+      attributes.a.value[i] = Math.sqrt(added_objects[i].a / 1000 * 4);
       attributes.e.value[i] = added_objects[i].e;
-      attributes.i.value[i] = added_objects[i].i;
-      attributes.o.value[i] = added_objects[i].om;
-      attributes.ma.value[i] = added_objects[i].ma;
+      attributes.i.value[i] = added_objects[i].i - 90; // rotate 90 degrees for this visualization
+      attributes.o.value[i] = added_objects[i].om || 0;
+      attributes.ma.value[i] = added_objects[i].ma || 0;
       attributes.n.value[i] = added_objects[i].n || -1.0;
-      attributes.w.value[i] = added_objects[i].w_bar
-        || (added_objects[i].w + added_objects[i].om);
-      attributes.P.value[i] = added_objects[i].P || -1.0;
-      attributes.epoch.value[i] = added_objects[i].epoch;
-      attributes.value_color.value[i] = new THREE.Color(0x00ff00);
+      attributes.w.value[i] = added_objects[i].w_bar ||
+        (added_objects[i].w + added_objects[i].om) || 0;
+      attributes.P.value[i] = added_objects[i].p;
+      attributes.epoch.value[i] = added_objects[i].epoch || Math.random() * 100000;
+      attributes.value_color.value[i] = new THREE.Color(0xffffff);
       particle_system_geometry.vertices.push(new THREE.Vector3(0, 0, 0));
     }  // end added_objects loop
+    console.log(attributes);
 
     var particleSystem = new THREE.ParticleSystem(
       particle_system_geometry,
