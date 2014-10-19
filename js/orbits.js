@@ -109,41 +109,77 @@ var LUNAR_ORBIT_DATA = [
 {
   name: 'Apollo 8',
   a: 1626.28, // estimated
-  e: 0,   // unknown
   i: 12,
   p: 120,
   link: 'https://en.wikipedia.org/wiki/Apollo_8',
   year: 1968,
 },
-/*
 {
   name: 'Apollo 10',
-  a: ,
-  e: ,
-  i: ,
+  i: 1.2,
   p: 120,
+  peri: 109.6,
+  apo: 113,
   link: 'https://en.wikipedia.org/wiki/Apollo_10',
   year: 1969,
 },
-*/
-/*
 {
   name: 'Apollo 11',
-  a: ,
-  e: ,
   i: 1.25,
   p: 120,
+  peri: 100.9,
+  apo: 122.4,
   link: 'https://en.wikipedia.org/wiki/Apollo_11',
   year: 1969,
 },
-*/
-// https://en.wikipedia.org/wiki/Apollo_12
-// https://en.wikipedia.org/wiki/Apollo_14
-// https://en.wikipedia.org/wiki/Apollo_15
+{
+  name: 'Apollo 12',
+  i: 0, // unknown
+  p: 120, // estimated
+  peri: 101.10,
+  apo: 122.42,
+  link: 'https://en.wikipedia.org/wiki/Apollo_12',
+  year: 1969,
+},
+{
+  name: 'Apollo 14',
+  i: 0, // unknown
+  p: 132.884, // estimated
+  peri: 16.9,
+  apo: 108.9,
+  link: 'https://en.wikipedia.org/wiki/Apollo_14',
+  year: 1971,
+},
+{
+  name: 'Apollo 15',
+  i: 23,
+  p: 136.445, // estimated
+  peri: 101.5,
+  apo: 120.8,
+  link: 'https://en.wikipedia.org/wiki/Apollo_15',
+  year: 1971,
+},
 // https://en.wikipedia.org/wiki/PFS-1#Lunar_subsatellite
-// https://en.wikipedia.org/wiki/Apollo_16
+{
+  name: 'Apollo 16',
+  i: 0, // unknown
+  p: 136, // estimated
+  peri: 20.2,
+  apo: 108.3,
+  link: 'https://en.wikipedia.org/wiki/Apollo_16',
+  year: 1972,
+},
 // https://en.wikipedia.org/wiki/PFS-2#Lunar_subsatellite_PFS-2
 // https://en.wikipedia.org/wiki/Apollo_17
+{
+  name: 'Apollo 17',
+  i: 0, // unknown
+  p: 133.268, // estimated
+  peri: 26.9,
+  apo: 109.3,
+  link: 'https://en.wikipedia.org/wiki/Apollo_17',
+  year: 1972,
+},
 // https://en.wikipedia.org/wiki/Hiten
 // https://en.wikipedia.org/wiki/Clementine_(spacecraft)
 {
@@ -164,20 +200,79 @@ var LUNAR_ORBIT_DATA = [
   link: 'https://en.wikipedia.org/wiki/SMART-1',
   year: 2004,
 },
-// https://en.wikipedia.org/wiki/SELENE
-// https://en.wikipedia.org/wiki/Chang%27e_1
-// https://en.wikipedia.org/wiki/Chang%27e_2
-// https://en.wikipedia.org/wiki/Chandrayaan-1
-// https://en.wikipedia.org/wiki/Lunar_Reconnaissance_Orbiter
+{
+  name: 'SELENE',
+  i: 90, // unknown
+  p: 120,
+  peri: 100,
+  apo: 100,
+  link: 'https://en.wikipedia.org/wiki/SELENE',
+  year: 2007,
+},
+{
+  name: 'Change\'e 1',
+  i: 64, // unknown
+  p: 127, // estimated
+  peri: 200,
+  apo: 200,
+  link: 'https://en.wikipedia.org/wiki/Chang%27e_1',
+  year: 2007,
+},
+/*
+{
+  name: 'Change\'e 2',
+  i: 64, // unknown
+  p: 127, // estimated
+  peri: 200,
+  apo: 200,
+  link: 'https://en.wikipedia.org/wiki/Chang%27e_2',
+  year: 2010,
+},
+*/
+{
+  name: 'Chandrayaan-1',
+  i: 0, // unknown
+  peri: 200,
+  apo: 200,
+  link: 'https://en.wikipedia.org/wiki/Chandrayaan-1',
+  year: 2009,
+},
+{
+  name: 'Lunar Reconnaissance Orbiter',
+  i: 0, // unknown
+  peri: 30,
+  apo: 216,
+  link: 'https://en.wikipedia.org/wiki/Lunar_Reconnaissance_Orbiter',
+  year: 2009,
+},
 // https://en.wikipedia.org/wiki/THEMIS#ARTEMIS
 // https://en.wikipedia.org/wiki/Gravity_Recovery_and_Interior_Laboratory
 {
   name: 'LADEE',
   a: 1531.42, // estimated
-  e: 0,  // unknown
   i: 157,
   p: 113,
   link: 'https://en.wikipedia.org/wiki/Lunar_Atmosphere_and_Dust_Environment_Explorer',
   year: 2013,
 },
 ];
+
+(function() {
+  for (var i=0; i < LUNAR_ORBIT_DATA.length; i++) {
+    var data = LUNAR_ORBIT_DATA[i];
+    // Fill in estimates for semi-major axis, period, and eccentricity.
+    if (!data.a) {
+      data.a = (data.peri + data.apo + 3476)/2;
+    }
+    if (!data.p) {
+      data.p = data.a * 0.07378781599;
+    }
+    if (!data.e) {
+      if (data.apo && data.peri) {
+        data.e = 1 - (2/((data.apo/data.peri) + 1))
+      } else {
+        data.e = 0;
+      }
+    }
+  }
+})();
