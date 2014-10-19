@@ -38,6 +38,8 @@
   };
 
   var domEvents;
+  var mouseTimeout = null;
+
   var uniforms;
 
   function createMoon(textureMap, normalMap) {
@@ -97,19 +99,21 @@
         domEvents.addEventListener(cube, 'click', function(e) {
           console.log(datum);
         }, false);
-        var mouseTimeout = null;
         domEvents.addEventListener(cube, 'mouseover', function(e) {
-          if (mouseTimeout) {
+          if (mouseTimeout !== null) {
             clearTimeout(mouseTimeout);
+            mouseTimeout = null;
           }
           document.getElementById('center-hud').innerHTML = datum.name;
         }, false);
         domEvents.addEventListener(cube, 'mouseout', function(e) {
-          if (mouseTimeout) {
+          if (mouseTimeout !== null) {
             clearTimeout(mouseTimeout);
+            mouseTimeout = null;
           }
           mouseTimeout = setTimeout(function() {
             document.getElementById('center-hud').innerHTML = '';
+            mouseTimeout = null;
           }, 1000);
         }, false);
         cube.position = vec3;
@@ -206,7 +210,7 @@
     window.ps = particleSystem;
 
     // add it to the scene
-    //scene.add(particleSystem);
+    scene.add(particleSystem);
   }
 
   function init() {
@@ -249,8 +253,8 @@
 
   function animate() {
     requestAnimationFrame(animate);
-    //light.orbit(moon.position, clock.getElapsedTime());
-    light.orbit(moon.position, 0);
+    light.orbit(moon.position, clock.getElapsedTime());
+    //light.orbit(moon.position, 0);
     controls.update(camera);
     //stats.update();
     renderer.render(scene, camera);
