@@ -222,6 +222,7 @@ var LUNAR_DATA = [
       "y":0.655925,
       "year": 1969,
       "country": "USA",
+      "manned": true,
    },
    {
       "name":"Apollo 12",
@@ -229,6 +230,7 @@ var LUNAR_DATA = [
       "y":-3.00903727405,
       "year": 1969,
       "country": "USA",
+      "manned": true,
    },
    {
       "name":"Apollo 14",
@@ -236,6 +238,7 @@ var LUNAR_DATA = [
       "y":-3.6006414905,
       "year": 1971,
       "country": "USA",
+      "manned": true,
    },
    {
       "name":"Apollo 15",
@@ -243,6 +246,7 @@ var LUNAR_DATA = [
       "y":26.1075606228,
       "year": 1971,
       "country": "USA",
+      "manned": true,
    },
    {
       "name":"Apollo 16",
@@ -250,6 +254,7 @@ var LUNAR_DATA = [
       "y":-8.97666787869,
       "year": 1972,
       "country": "USA",
+      "manned": true,
    },
    {
       "name":"Apollo 17",
@@ -257,5 +262,6 @@ var LUNAR_DATA = [
       "y":20.1743655963,
       "year": 1972,
       "country": "USA",
+      "manned": true,
    }
 ];

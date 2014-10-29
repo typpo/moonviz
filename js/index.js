@@ -252,6 +252,7 @@
       'Current missions': true,
       'Planned missions': true,
       'Filter by country': 'all',
+      'Human or robotic': 'both',
       'Reset camera': function() {
         camera.position.set(0,0,980);
         camera.rotation.set(0,0,0);
@@ -286,6 +287,21 @@
       });
     });
 
+    gui.add(uiOptions, 'Human or robotic', ['both', 'human', 'robotic']).onChange(function(value) {
+      filterVisibility(function(obj) {
+        if (value === 'both') {
+          return true;
+        }
+        if (value === 'human' && obj.data.manned) {
+          return true;
+        }
+        if (value === 'robotic' && !obj.data.manned) {
+          return true;
+        }
+        return false;
+      });
+    });
+
     gui.add(uiOptions, 'Show orbits', false);
 
     gui.add(uiOptions, 'Reset camera');
@@ -310,16 +326,17 @@
     var planned = uiOptions['Planned missions'];
 
     filterVisibility(function(obj) {
-      var visible = false;
       if (past && !obj.data.state) {
         // No state data implies past mission.
-        visible = true;
-      } else if (current && obj.data.state === 'CURRENT') {
-        visible = true;
-      } else if (planned && obj.data.state === 'PLANNED') {
-        visible = true;
+        return true;
       }
-      return visible;
+      if (current && obj.data.state === 'CURRENT') {
+        return true;
+      }
+      if (planned && obj.data.state === 'PLANNED') {
+        return true;
+      }
+      return false;
     });
   };
 

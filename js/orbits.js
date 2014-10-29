@@ -137,6 +137,7 @@ var LUNAR_ORBIT_DATA = [
   link: 'https://en.wikipedia.org/wiki/Apollo_8',
   year: 1968,
   country: 'USA',
+  manned: true,
 },
 {
   name: 'Apollo 10',
@@ -147,6 +148,7 @@ var LUNAR_ORBIT_DATA = [
   link: 'https://en.wikipedia.org/wiki/Apollo_10',
   year: 1969,
   country: 'USA',
+  manned: true,
 },
 {
   name: 'Apollo 11',
@@ -157,6 +159,7 @@ var LUNAR_ORBIT_DATA = [
   link: 'https://en.wikipedia.org/wiki/Apollo_11',
   year: 1969,
   country: 'USA',
+  manned: true,
 },
 {
   name: 'Apollo 12',
@@ -167,6 +170,7 @@ var LUNAR_ORBIT_DATA = [
   link: 'https://en.wikipedia.org/wiki/Apollo_12',
   year: 1969,
   country: 'USA',
+  manned: true,
 },
 {
   name: 'Apollo 14',
@@ -177,6 +181,7 @@ var LUNAR_ORBIT_DATA = [
   link: 'https://en.wikipedia.org/wiki/Apollo_14',
   year: 1971,
   country: 'USA',
+  manned: true,
 },
 {
   name: 'Apollo 15',
@@ -187,6 +192,7 @@ var LUNAR_ORBIT_DATA = [
   link: 'https://en.wikipedia.org/wiki/Apollo_15',
   year: 1971,
   country: 'USA',
+  manned: true,
 },
 // https://en.wikipedia.org/wiki/PFS-1#Lunar_subsatellite
 {
@@ -197,6 +203,7 @@ var LUNAR_ORBIT_DATA = [
   apo: 108.3,
   link: 'https://en.wikipedia.org/wiki/Apollo_16',
   year: 1972,
+  manned: true,
   country: 'USA',
 },
 // https://en.wikipedia.org/wiki/PFS-2#Lunar_subsatellite_PFS-2
@@ -210,6 +217,7 @@ var LUNAR_ORBIT_DATA = [
   link: 'https://en.wikipedia.org/wiki/Apollo_17',
   year: 1972,
   country: 'USA',
+  manned: true,
 },
 // https://en.wikipedia.org/wiki/Hiten
 // https://en.wikipedia.org/wiki/Clementine_(spacecraft)
