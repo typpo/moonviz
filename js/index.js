@@ -158,12 +158,15 @@
       epoch: { type: 'f', value: [] },
 
       size: { type: 'f', value: [] },
+      year: { type: 'f', value: [] },
       value_color : { type: 'c', value: [] },
     };
 
     uniforms = {
-      color: { type: 'c', value: new THREE.Color( 0xffffff ) },
+      color: { type: 'c', value: new THREE.Color(0xffffff) },
       jed: { type: 'f', value: 2451545.0 },
+      min_year: { type: 'f', value: 0.0 },
+      max_year: { type: 'f', value: 3000.0 },
       small_roid_texture:
         { type: 't', value: loadTexture('img/cloud4.png') },
     };
@@ -187,19 +190,30 @@
 
     var particle_system_geometry = new THREE.Geometry();
     for (var i = 0; i < added_objects.length; i++) {
+      var obj = added_objects[i];
       attributes.size.value[i] = 25;
 
-      attributes.a.value[i] = Math.sqrt(added_objects[i].a / 1000 * 4);
-      attributes.e.value[i] = added_objects[i].e;
-      attributes.i.value[i] = added_objects[i].i - 90; // rotate 90 degrees for this visualization
-      attributes.o.value[i] = added_objects[i].om || 0;
-      attributes.ma.value[i] = added_objects[i].ma || 0;
-      attributes.n.value[i] = added_objects[i].n || -1.0;
-      attributes.w.value[i] = added_objects[i].w_bar ||
-        (added_objects[i].w + added_objects[i].om) || Math.random() * 360 - 180;
-      attributes.P.value[i] = added_objects[i].p;
-      attributes.epoch.value[i] = added_objects[i].epoch || Math.random() * 100000;
-      attributes.value_color.value[i] = new THREE.Color(0xffffff);
+      attributes.a.value[i] = Math.sqrt(obj.a / 1000 * 4);
+      attributes.e.value[i] = obj.e;
+      attributes.i.value[i] = obj.i - 90; // rotate 90 degrees for this visualization
+      attributes.o.value[i] = obj.om || 0;
+      attributes.ma.value[i] = obj.ma || 0;
+      attributes.n.value[i] = obj.n || -1.0;
+      attributes.w.value[i] = obj.w_bar ||
+        (obj.w + obj.om) || Math.random() * 360 - 180;
+      attributes.P.value[i] = obj.p;
+      attributes.epoch.value[i] = obj.epoch || Math.random() * 100000;
+
+      attributes.value_color.value[i] = (function() {
+        if (obj.state === 'CURRENT') {
+          return new THREE.Color(0x00ff00);
+        } else if (obj.state === 'FUTURE') {
+          return new THREE.Color(0x0000ff);
+        }
+        return new THREE.Color(0xffffff);
+      })();
+      attributes.year.value[i] = obj.year;
+
       particle_system_geometry.vertices.push(new THREE.Vector3(0, 0, 0));
     }  // end added_objects loop
 
@@ -238,6 +252,7 @@
     gui.add(uiOptions, 'Current missions', true);
     gui.add(uiOptions, 'Planned missions', true);
     gui.add(uiOptions, 'Filter by country', COUNTRIES);
+
     // TODO commercial/gvt
     // TODO human/robotic
   }
@@ -290,6 +305,10 @@
 
     // jed
     uniforms.jed.value += uiOptions['Time speed'];
+
+    // min year
+    uniforms.min_year.value = uiOptions['Min year'];
+    uniforms.max_year.value = uiOptions['Max year'];
   }
 
   function toggleHud() {

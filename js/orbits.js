@@ -6,6 +6,7 @@ var LUNAR_ORBIT_DATA = [
   i: 71.9,
   p: 178.05,
   link: 'https://en.wikipedia.org/wiki/Luna_10',
+  year: 1966,
 },
 {
   name: 'Lunar Orbiter 1',
@@ -14,6 +15,7 @@ var LUNAR_ORBIT_DATA = [
   i: 12,
   p: 208.1,
   link: 'https://en.wikipedia.org/wiki/Lunar_Orbiter_1',
+  year: 1966,
 },
 {
   name: 'Luna 11',
@@ -22,6 +24,7 @@ var LUNAR_ORBIT_DATA = [
   i: 27,
   p: 178,
   link: 'https://en.wikipedia.org/wiki/Luna_11',
+  year: 1966,
 },
 {
   name: 'Luna 12',
@@ -30,6 +33,7 @@ var LUNAR_ORBIT_DATA = [
   i: 10,
   p: 205,
   link: 'https://en.wikipedia.org/wiki/Luna_12',
+  year: 1966,
 },
 {
   name: 'Lunar Orbiter 2',
@@ -38,6 +42,7 @@ var LUNAR_ORBIT_DATA = [
   i: 11.899999618530273,
   p: 208.07000732421875,
   link: 'https://en.wikipedia.org/wiki/Lunar_Orbiter_2',
+  year: 1966,
 },
 {
   name: 'Lunar Orbiter 3',
@@ -46,6 +51,7 @@ var LUNAR_ORBIT_DATA = [
   i: 20.9,
   p: 208.1,
   link: 'https://en.wikipedia.org/wiki/Lunar_Orbiter_3',
+  year: 1967,
 },
 {
   name: 'Lunar Orbiter 4',
@@ -54,6 +60,7 @@ var LUNAR_ORBIT_DATA = [
   i: 85.5,
   p: 721,
   link: 'https://en.wikipedia.org/wiki/Lunar_Orbiter_4',
+  year: 1967,
 },
 {
   name: 'Explorer 35',
@@ -62,6 +69,7 @@ var LUNAR_ORBIT_DATA = [
   i: 147.3,
   p: 710,
   link: 'https://en.wikipedia.org/wiki/Explorer_35',
+  year: 1967,
 },
 {
   name: 'Lunar Orbiter 5',
@@ -70,6 +78,7 @@ var LUNAR_ORBIT_DATA = [
   i: 85,
   p: 510.08,
   link: 'https://en.wikipedia.org/wiki/Lunar_Orbiter_5',
+  year: 1967,
 },
 {
   name: 'Luna 14',
@@ -78,6 +87,7 @@ var LUNAR_ORBIT_DATA = [
   i: 42,
   p: 160,
   link: 'https://en.wikipedia.org/wiki/Luna_14',
+  year: 1968,
 },
 {
   name: 'Luna 19',
@@ -86,6 +96,7 @@ var LUNAR_ORBIT_DATA = [
   i: 40.58,
   p: 121.13,
   link: 'https://en.wikipedia.org/wiki/Luna_19',
+  year: 1971,
 },
 /*
 {
@@ -254,7 +265,9 @@ var LUNAR_ORBIT_DATA = [
   p: 113,
   link: 'https://en.wikipedia.org/wiki/Lunar_Atmosphere_and_Dust_Environment_Explorer',
   year: 2013,
+  state: 'CURRENT',
 },
+// TODO add proposed missions http://en.wikipedia.org/wiki/List_of_proposed_missions_to_the_Moon
 ];
 
 (function() {
