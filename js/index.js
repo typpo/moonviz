@@ -43,6 +43,8 @@
   var uniforms;
   var uiOptions;
 
+  var surfaceMarkers;
+
   function createMoon(textureMap, normalMap) {
     var radius = 100;
     var xSegments = 50;
@@ -83,6 +85,7 @@
   }
 
   function createObjects() {
+    surfaceMarkers = [];
     for (var i=0; i < LUNAR_DATA.length; i++) {
       (function() {
         var datum = LUNAR_DATA[i];
@@ -92,22 +95,22 @@
         //material.depthWrite = true;
         //var geom = new THREE.CircleGeometry(1, 64);
         var geom =  new THREE.SphereGeometry(1,64,64);
-        var cube = new THREE.Mesh(geom, material);
+        var marker = new THREE.Mesh(geom, material);
         /*
         geom.vertices.shift();  // remove center vertex
-        var cube = new THREE.Line(geom, new THREE.LineBasicMaterial({color: 0xffff00 }));
+        var marker = new THREE.Line(geom, new THREE.LineBasicMaterial({color: 0xffff00 }));
        */
-        domEvents.addEventListener(cube, 'click', function(e) {
+        domEvents.addEventListener(marker, 'click', function(e) {
           console.log(datum);
         }, false);
-        domEvents.addEventListener(cube, 'mouseover', function(e) {
+        domEvents.addEventListener(marker, 'mouseover', function(e) {
           if (mouseTimeout !== null) {
             clearTimeout(mouseTimeout);
             mouseTimeout = null;
           }
           document.getElementById('center-hud').innerHTML = datum.name;
         }, false);
-        domEvents.addEventListener(cube, 'mouseout', function(e) {
+        domEvents.addEventListener(marker, 'mouseout', function(e) {
           if (mouseTimeout !== null) {
             clearTimeout(mouseTimeout);
             mouseTimeout = null;
@@ -117,8 +120,12 @@
             mouseTimeout = null;
           }, 1000);
         }, false);
-        cube.position = vec3;
-        scene.add(cube);
+        marker.position = vec3;
+        scene.add(marker);
+        surfaceMarkers.push({
+          marker: marker,
+          data: datum,
+        });
       })();
     }
   }
@@ -242,8 +249,18 @@
       'Planned missions': true,
       'Filter by country': 'all',
     };
-    gui.add(uiOptions, 'Min year', 1950, 2099);
-    gui.add(uiOptions, 'Max year', 1951, 2100);
+    gui.add(uiOptions, 'Min year', 1950, 2099).onChange(function(value) {
+      uniforms.min_year.value = value;
+      surfaceMarkers.forEach(function(obj) {
+        obj.marker.visible = obj.data.year >= value;
+      });
+    });
+    gui.add(uiOptions, 'Max year', 1951, 2100).onChange(function(value) {
+      uniforms.max_year.value = value;
+      surfaceMarkers.forEach(function(obj) {
+        obj.marker.visible = obj.data.year <= value;
+      });
+    });
     gui.add(uiOptions, 'Time speed', 0.0, 1.0).onChange(function(value) {
 
     });
@@ -305,10 +322,6 @@
 
     // jed
     uniforms.jed.value += uiOptions['Time speed'];
-
-    // min year
-    uniforms.min_year.value = uiOptions['Min year'];
-    uniforms.max_year.value = uiOptions['Max year'];
   }
 
   function toggleHud() {
