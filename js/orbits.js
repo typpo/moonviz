@@ -7,6 +7,7 @@ var LUNAR_ORBIT_DATA = [
   p: 178.05,
   link: 'https://en.wikipedia.org/wiki/Luna_10',
   year: 1966,
+  country: 'Russia',
 },
 {
   name: 'Lunar Orbiter 1',
@@ -16,6 +17,7 @@ var LUNAR_ORBIT_DATA = [
   p: 208.1,
   link: 'https://en.wikipedia.org/wiki/Lunar_Orbiter_1',
   year: 1966,
+  country: 'USA',
 },
 {
   name: 'Luna 11',
@@ -25,6 +27,7 @@ var LUNAR_ORBIT_DATA = [
   p: 178,
   link: 'https://en.wikipedia.org/wiki/Luna_11',
   year: 1966,
+  country: 'Russia',
 },
 {
   name: 'Luna 12',
@@ -34,6 +37,7 @@ var LUNAR_ORBIT_DATA = [
   p: 205,
   link: 'https://en.wikipedia.org/wiki/Luna_12',
   year: 1966,
+  country: 'Russia',
 },
 {
   name: 'Lunar Orbiter 2',
@@ -43,6 +47,7 @@ var LUNAR_ORBIT_DATA = [
   p: 208.07000732421875,
   link: 'https://en.wikipedia.org/wiki/Lunar_Orbiter_2',
   year: 1966,
+  country: 'USA',
 },
 {
   name: 'Lunar Orbiter 3',
@@ -52,6 +57,7 @@ var LUNAR_ORBIT_DATA = [
   p: 208.1,
   link: 'https://en.wikipedia.org/wiki/Lunar_Orbiter_3',
   year: 1967,
+  country: 'USA',
 },
 {
   name: 'Lunar Orbiter 4',
@@ -61,6 +67,7 @@ var LUNAR_ORBIT_DATA = [
   p: 721,
   link: 'https://en.wikipedia.org/wiki/Lunar_Orbiter_4',
   year: 1967,
+  country: 'USA',
 },
 {
   name: 'Explorer 35',
@@ -70,6 +77,7 @@ var LUNAR_ORBIT_DATA = [
   p: 710,
   link: 'https://en.wikipedia.org/wiki/Explorer_35',
   year: 1967,
+  country: 'USA',
 },
 {
   name: 'Lunar Orbiter 5',
@@ -79,6 +87,7 @@ var LUNAR_ORBIT_DATA = [
   p: 510.08,
   link: 'https://en.wikipedia.org/wiki/Lunar_Orbiter_5',
   year: 1967,
+  country: 'USA',
 },
 {
   name: 'Luna 14',
@@ -88,6 +97,7 @@ var LUNAR_ORBIT_DATA = [
   p: 160,
   link: 'https://en.wikipedia.org/wiki/Luna_14',
   year: 1968,
+  country: 'Russia',
 },
 {
   name: 'Luna 19',
@@ -97,6 +107,7 @@ var LUNAR_ORBIT_DATA = [
   p: 121.13,
   link: 'https://en.wikipedia.org/wiki/Luna_19',
   year: 1971,
+  country: 'Russia',
 },
 /*
 {
@@ -116,6 +127,7 @@ var LUNAR_ORBIT_DATA = [
   p: 130,
   link: 'https://en.wikipedia.org/wiki/Luna_22',
   year: 1974,
+  country: 'Russia',
 },
 {
   name: 'Apollo 8',
@@ -124,6 +136,7 @@ var LUNAR_ORBIT_DATA = [
   p: 120,
   link: 'https://en.wikipedia.org/wiki/Apollo_8',
   year: 1968,
+  country: 'USA',
 },
 {
   name: 'Apollo 10',
@@ -133,6 +146,7 @@ var LUNAR_ORBIT_DATA = [
   apo: 113,
   link: 'https://en.wikipedia.org/wiki/Apollo_10',
   year: 1969,
+  country: 'USA',
 },
 {
   name: 'Apollo 11',
@@ -142,6 +156,7 @@ var LUNAR_ORBIT_DATA = [
   apo: 122.4,
   link: 'https://en.wikipedia.org/wiki/Apollo_11',
   year: 1969,
+  country: 'USA',
 },
 {
   name: 'Apollo 12',
@@ -151,6 +166,7 @@ var LUNAR_ORBIT_DATA = [
   apo: 122.42,
   link: 'https://en.wikipedia.org/wiki/Apollo_12',
   year: 1969,
+  country: 'USA',
 },
 {
   name: 'Apollo 14',
@@ -160,6 +176,7 @@ var LUNAR_ORBIT_DATA = [
   apo: 108.9,
   link: 'https://en.wikipedia.org/wiki/Apollo_14',
   year: 1971,
+  country: 'USA',
 },
 {
   name: 'Apollo 15',
@@ -169,6 +186,7 @@ var LUNAR_ORBIT_DATA = [
   apo: 120.8,
   link: 'https://en.wikipedia.org/wiki/Apollo_15',
   year: 1971,
+  country: 'USA',
 },
 // https://en.wikipedia.org/wiki/PFS-1#Lunar_subsatellite
 {
@@ -179,6 +197,7 @@ var LUNAR_ORBIT_DATA = [
   apo: 108.3,
   link: 'https://en.wikipedia.org/wiki/Apollo_16',
   year: 1972,
+  country: 'USA',
 },
 // https://en.wikipedia.org/wiki/PFS-2#Lunar_subsatellite_PFS-2
 // https://en.wikipedia.org/wiki/Apollo_17
@@ -190,6 +209,7 @@ var LUNAR_ORBIT_DATA = [
   apo: 109.3,
   link: 'https://en.wikipedia.org/wiki/Apollo_17',
   year: 1972,
+  country: 'USA',
 },
 // https://en.wikipedia.org/wiki/Hiten
 // https://en.wikipedia.org/wiki/Clementine_(spacecraft)
@@ -201,6 +221,7 @@ var LUNAR_ORBIT_DATA = [
   p: 117.9,
   link: 'https://en.wikipedia.org/wiki/Lunar_Prospector',
   year: 1998,
+  country: 'USA',
 },
 {
   name: 'SMART-1',
@@ -210,6 +231,7 @@ var LUNAR_ORBIT_DATA = [
   p: 297,
   link: 'https://en.wikipedia.org/wiki/SMART-1',
   year: 2004,
+  country: 'EU',
 },
 {
   name: 'SELENE',
@@ -219,6 +241,7 @@ var LUNAR_ORBIT_DATA = [
   apo: 100,
   link: 'https://en.wikipedia.org/wiki/SELENE',
   year: 2007,
+  country: 'Japan',
 },
 {
   name: 'Change\'e 1',
@@ -228,6 +251,7 @@ var LUNAR_ORBIT_DATA = [
   apo: 200,
   link: 'https://en.wikipedia.org/wiki/Chang%27e_1',
   year: 2007,
+  country: 'China',
 },
 /*
 {
@@ -238,6 +262,7 @@ var LUNAR_ORBIT_DATA = [
   apo: 200,
   link: 'https://en.wikipedia.org/wiki/Chang%27e_2',
   year: 2010,
+  country: 'China',
 },
 */
 {
@@ -247,6 +272,7 @@ var LUNAR_ORBIT_DATA = [
   apo: 200,
   link: 'https://en.wikipedia.org/wiki/Chandrayaan-1',
   year: 2009,
+  country: 'India',
 },
 {
   name: 'Lunar Reconnaissance Orbiter',
@@ -255,6 +281,7 @@ var LUNAR_ORBIT_DATA = [
   apo: 216,
   link: 'https://en.wikipedia.org/wiki/Lunar_Reconnaissance_Orbiter',
   year: 2009,
+  country: 'USA',
 },
 // https://en.wikipedia.org/wiki/THEMIS#ARTEMIS
 // https://en.wikipedia.org/wiki/Gravity_Recovery_and_Interior_Laboratory
@@ -266,6 +293,7 @@ var LUNAR_ORBIT_DATA = [
   link: 'https://en.wikipedia.org/wiki/Lunar_Atmosphere_and_Dust_Environment_Explorer',
   year: 2013,
   state: 'CURRENT',
+  country: 'USA',
 },
 // TODO add proposed missions http://en.wikipedia.org/wiki/List_of_proposed_missions_to_the_Moon
 ];

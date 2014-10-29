@@ -241,7 +241,7 @@
   }
 
   function createGui() {
-    var COUNTRIES = ['all', 'USA', 'Russia', 'EU'];
+    var COUNTRIES = ['all', 'USA', 'Russia', 'EU', 'China', 'Japan', 'India'];
 
     var gui = new dat.GUI();
     uiOptions = {
@@ -279,8 +279,15 @@
     gui.add(uiOptions, 'Current missions', true).onChange(filterPastCurrentPlanned);
     gui.add(uiOptions, 'Planned missions', true).onChange(filterPastCurrentPlanned);
 
+    gui.add(uiOptions, 'Filter by country', COUNTRIES).onChange(function(value) {
+      filterVisibility(function(obj) {
+        if (value === 'all')
+          return true;
+        return obj.data.country === value;
+      });
+    });
+
     gui.add(uiOptions, 'Show orbits', false);
-    gui.add(uiOptions, 'Filter by country', COUNTRIES);
 
     gui.add(uiOptions, 'Reset camera');
 
