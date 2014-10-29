@@ -247,12 +247,16 @@
     uiOptions = {
       'Min year': 1950,
       'Max year': 2030,
-      'Time speed': 0.25,
+      'Speed': 0.25,
       'Show orbits': false,
       'Past missions': true,
       'Current missions': true,
       'Planned missions': true,
       'Filter by country': 'all',
+      'Reset camera': function() {
+        camera.position.set(0,0,980);
+        camera.rotation.set(0,0,0);
+      },
     };
     // TODO make sure min year < max year
     gui.add(uiOptions, 'Min year', 1950, 2029).onChange(function(value) {
@@ -265,7 +269,7 @@
         return obj.data.year <= value;
       });
     });
-    gui.add(uiOptions, 'Time speed', 0.0, 1.0).onChange(function(value) {
+    gui.add(uiOptions, 'Speed', 0.0, 1.0).onChange(function(value) {
       uniforms.max_year.value = value;
       surfaceMarkers.forEach(function(obj) {
         obj.marker.visible = obj.data.year <= value;
@@ -277,6 +281,9 @@
 
     gui.add(uiOptions, 'Show orbits', false);
     gui.add(uiOptions, 'Filter by country', COUNTRIES);
+
+    gui.add(uiOptions, 'Reset camera');
+
 
     // TODO commercial/gvt
     // TODO human/robotic
@@ -306,6 +313,7 @@
       } else if (planned && obj.data.state === 'PLANNED') {
         visible = true;
       }
+      return visible;
     });
   };
 
@@ -356,7 +364,7 @@
     renderer.render(scene, camera);
 
     // jed
-    uniforms.jed.value += uiOptions['Time speed'];
+    uniforms.jed.value += uiOptions['Speed'];
   }
 
   function toggleHud() {
