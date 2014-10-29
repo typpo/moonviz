@@ -90,7 +90,15 @@
       (function() {
         var datum = LUNAR_DATA[i];
         var vec3 = latLongToVector3(datum.y, datum.x, 100, 1);
-        var material = new THREE.MeshBasicMaterial({color: 0xFEE5AC});
+        var material = (function() {
+          var color = 0xFEE5AC;
+          if (datum.state === 'CURRENT') {
+            color = 0x00ff00;
+          } else if (datum.state === 'FUTURE') {
+            color = 0x0000ff;
+          }
+          return new THREE.MeshBasicMaterial({color: color});
+        })();
         //material.depthTest = true;
         //material.depthWrite = true;
         //var geom = new THREE.CircleGeometry(1, 64);
