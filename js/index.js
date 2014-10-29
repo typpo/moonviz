@@ -219,6 +219,7 @@
         }
         return new THREE.Color(0xffffff);
       })();
+      // TODO replace with is_visible
       attributes.year.value[i] = obj.year;
 
       particle_system_geometry.vertices.push(new THREE.Vector3(0, 0, 0));
@@ -262,17 +263,42 @@
       });
     });
     gui.add(uiOptions, 'Time speed', 0.0, 1.0).onChange(function(value) {
-
+      uniforms.max_year.value = value;
+      surfaceMarkers.forEach(function(obj) {
+        obj.marker.visible = obj.data.year <= value;
+      });
     });
+    gui.add(uiOptions, 'Past missions', true).onChange(filterPastCurrentPlanned);
+    gui.add(uiOptions, 'Current missions', true).onChange(filterPastCurrentPlanned);
+    gui.add(uiOptions, 'Planned missions', true).onChange(filterPastCurrentPlanned);
+
+
     gui.add(uiOptions, 'Show orbits', false);
-    gui.add(uiOptions, 'Past missions', true);
-    gui.add(uiOptions, 'Current missions', true);
-    gui.add(uiOptions, 'Planned missions', true);
     gui.add(uiOptions, 'Filter by country', COUNTRIES);
 
     // TODO commercial/gvt
     // TODO human/robotic
   }
+
+  function filterPastCurrentPlanned() {
+    console.log('hue');
+    var past = uiOptions['Past missions'];
+    var current = uiOptions['Current missions'];
+    var planned = uiOptions['Planned missions'];
+
+    surfaceMarkers.forEach(function(obj) {
+      var visible = false;
+      if (past && !obj.data.state) {
+        // No state data implies past mission.
+        visible = true;
+      } else if (current && obj.data.state === 'CURRENT') {
+        visible = true;
+      } else if (planned && obj.data.state === 'PLANNED') {
+        visible = true;
+      }
+      obj.marker.visible = visible;
+    });
+  };
 
   function init() {
     renderer = new THREE.WebGLRenderer({
