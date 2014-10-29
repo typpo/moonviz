@@ -278,12 +278,7 @@
         return obj.data.year <= value;
       });
     });
-    gui.add(uiOptions, 'Speed', 0.0, 1.0).onChange(function(value) {
-      uniforms.max_year.value = value;
-      surfaceMarkers.forEach(function(obj) {
-        obj.marker.visible = obj.data.year <= value;
-      });
-    });
+    gui.add(uiOptions, 'Speed', 0.0, 1.0);
     gui.add(uiOptions, 'Past missions', true).onChange(filterPastCurrentPlanned);
     gui.add(uiOptions, 'Current missions', true).onChange(filterPastCurrentPlanned);
     gui.add(uiOptions, 'Planned missions', true).onChange(filterPastCurrentPlanned);
