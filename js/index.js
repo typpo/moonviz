@@ -41,6 +41,7 @@
   var mouseTimeout = null;
 
   var uniforms;
+  var uiOptions;
 
   function createMoon(textureMap, normalMap) {
     var radius = 100;
@@ -214,14 +215,31 @@
   }
 
   function createGui() {
-    return; // disabled for now.
+    var COUNTRIES = ['all', 'USA', 'Russia', 'EU'];
+
     var gui = new dat.GUI();
-    var uiOptions = {
-      'Min Year': 1950,
-      'Max Year': 2100,
+    uiOptions = {
+      'Min year': 1950,
+      'Max year': 2100,
+      'Time speed': 0.25,
+      'Show orbits': false,
+      'Past missions': true,
+      'Current missions': true,
+      'Planned missions': true,
+      'Filter by country': 'all',
     };
-    gui.add(uiOptions, 'Min Year', 1950, 2099);
-    gui.add(uiOptions, 'Max Year', 1951, 2100);
+    gui.add(uiOptions, 'Min year', 1950, 2099);
+    gui.add(uiOptions, 'Max year', 1951, 2100);
+    gui.add(uiOptions, 'Time speed', 0.0, 1.0).onChange(function(value) {
+
+    });
+    gui.add(uiOptions, 'Show orbits', false);
+    gui.add(uiOptions, 'Past missions', true);
+    gui.add(uiOptions, 'Current missions', true);
+    gui.add(uiOptions, 'Planned missions', true);
+    gui.add(uiOptions, 'Filter by country', COUNTRIES);
+    // TODO commercial/gvt
+    // TODO human/robotic
   }
 
   function init() {
@@ -271,7 +289,7 @@
     renderer.render(scene, camera);
 
     // jed
-    uniforms.jed.value += 0.25;
+    uniforms.jed.value += uiOptions['Time speed'];
   }
 
   function toggleHud() {
