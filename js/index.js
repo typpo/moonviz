@@ -176,8 +176,7 @@
         { type: 't', value: loadTexture('img/cloud4.png') },
     };
 
-    var vertexshader = document.getElementById('orbit-vertex-shader').textContent
-                          .replace('{{PIXELS_PER_AU}}', 300.0); // moon diameter
+    var vertexshader = document.getElementById('orbit-vertex-shader').textContent;
 
     var particle_system_shader_material = new THREE.ShaderMaterial( {
       uniforms:       uniforms,
