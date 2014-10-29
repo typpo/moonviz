@@ -177,7 +177,7 @@
     };
 
     var vertexshader = document.getElementById('orbit-vertex-shader').textContent
-                          .replace('{{PIXELS_PER_AU}}', 200.0); // moon diameter
+                          .replace('{{PIXELS_PER_AU}}', 300.0); // moon diameter
 
     var particle_system_shader_material = new THREE.ShaderMaterial( {
       uniforms:       uniforms,
