@@ -497,8 +497,8 @@
   function onWindowLoaded() {
     loadAssets({
       paths: {
-        moon: 'img/maps/moon_8k_color_brim16.jpg',
-        moonNormal: 'img/maps/moon_8k_normal.jpg',
+        moon: 'img/maps/moon.jpg',
+        moonNormal: 'img/maps/normal.jpg',
         starfield: [
           'img/starfield/front.png',
           'img/starfield/back.png',
