@@ -40,10 +40,10 @@
   var domEvents;
   var mouseTimeout = null;
 
-  var uniforms;
+  var uniforms, attributes;
   var uiOptions;
 
-  var surfaceMarkers;
+  var surfaceMarkers, orbitVisibilityAttributes;
 
   function createMoon(textureMap, normalMap) {
     var radius = 100;
@@ -153,7 +153,7 @@
   }
 
  function createParticleSystem() {
-    var attributes = {
+    attributes = {
       a: { type: 'f', value: [] },
       e: { type: 'f', value: [] },
       i: { type: 'f', value: [] },
@@ -164,16 +164,14 @@
       P: { type: 'f', value: [] },
       epoch: { type: 'f', value: [] },
 
+      visible: { type: 'f', value: [] },
       size: { type: 'f', value: [] },
-      year: { type: 'f', value: [] },
       value_color : { type: 'c', value: [] },
     };
 
     uniforms = {
       color: { type: 'c', value: new THREE.Color(0xffffff) },
       jed: { type: 'f', value: 2451545.0 },
-      min_year: { type: 'f', value: 0.0 },
-      max_year: { type: 'f', value: 3000.0 },
       small_roid_texture:
         { type: 't', value: loadTexture('img/cloud4.png') },
     };
@@ -194,6 +192,7 @@
     particle_system_shader_material.blending = THREE.AdditiveBlending;
 
     var added_objects = LUNAR_ORBIT_DATA;
+    orbitVisibilityAttributes = [];
 
     var particle_system_geometry = new THREE.Geometry();
     for (var i = 0; i < added_objects.length; i++) {
@@ -219,8 +218,13 @@
         }
         return new THREE.Color(0xffffff);
       })();
-      // TODO replace with is_visible
-      attributes.year.value[i] = obj.year;
+
+      attributes.visible.value[i] = 1.0;
+
+      orbitVisibilityAttributes.push({
+        attributeIndex: i,
+        data: obj,
+      });
 
       particle_system_geometry.vertices.push(new THREE.Vector3(0, 0, 0));
     }  // end added_objects loop
@@ -242,7 +246,7 @@
     var gui = new dat.GUI();
     uiOptions = {
       'Min year': 1950,
-      'Max year': 2100,
+      'Max year': 2030,
       'Time speed': 0.25,
       'Show orbits': false,
       'Past missions': true,
@@ -250,16 +254,15 @@
       'Planned missions': true,
       'Filter by country': 'all',
     };
-    gui.add(uiOptions, 'Min year', 1950, 2099).onChange(function(value) {
-      uniforms.min_year.value = value;
-      surfaceMarkers.forEach(function(obj) {
-        obj.marker.visible = obj.data.year >= value;
+    // TODO make sure min year < max year
+    gui.add(uiOptions, 'Min year', 1950, 2029).onChange(function(value) {
+      filterVisibility(function(obj) {
+        return obj.data.year >= value;
       });
     });
-    gui.add(uiOptions, 'Max year', 1951, 2100).onChange(function(value) {
-      uniforms.max_year.value = value;
-      surfaceMarkers.forEach(function(obj) {
-        obj.marker.visible = obj.data.year <= value;
+    gui.add(uiOptions, 'Max year', 1951, 2030).onChange(function(value) {
+      filterVisibility(function(obj) {
+        return obj.data.year <= value;
       });
     });
     gui.add(uiOptions, 'Time speed', 0.0, 1.0).onChange(function(value) {
@@ -272,7 +275,6 @@
     gui.add(uiOptions, 'Current missions', true).onChange(filterPastCurrentPlanned);
     gui.add(uiOptions, 'Planned missions', true).onChange(filterPastCurrentPlanned);
 
-
     gui.add(uiOptions, 'Show orbits', false);
     gui.add(uiOptions, 'Filter by country', COUNTRIES);
 
@@ -280,8 +282,16 @@
     // TODO human/robotic
   }
 
+  function filterVisibility(predicate) {
+    surfaceMarkers.forEach(function(obj) {
+      obj.marker.visible = predicate(obj);
+    });
+    orbitVisibilityAttributes.forEach(function(obj) {
+      attributes.visible.value[obj.attributeIndex] = predicate(obj);
+    });
+  }
+
   function filterPastCurrentPlanned() {
-    console.log('hue');
     var past = uiOptions['Past missions'];
     var current = uiOptions['Current missions'];
     var planned = uiOptions['Planned missions'];

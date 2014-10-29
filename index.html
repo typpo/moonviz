@@ -97,8 +97,6 @@
       attribute float size;
 
       uniform float jed;
-      uniform float min_year;
-      uniform float max_year;
 
       attribute float a;
       attribute float e;
@@ -110,7 +108,7 @@
       attribute float w;
       attribute float epoch;
 
-      attribute float year;
+      attribute float visible;
 
       varying float vLocked;
       varying float vDiscard;
@@ -161,7 +159,7 @@
 
       void main() {
         vColor = value_color;
-        if (year < min_year || year > max_year) {
+        if (abs(visible) < 0.1) {
           vDiscard = 1.0;
           return;
         }
