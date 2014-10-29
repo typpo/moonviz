@@ -253,6 +253,7 @@
       'Planned missions': true,
       'Filter by country': 'all',
       'Human or robotic': 'both',
+      'Private or public': 'both',
       'Reset camera': function() {
         camera.position.set(0,0,980);
         camera.rotation.set(0,0,0);
@@ -296,6 +297,23 @@
           return true;
         }
         if (value === 'robotic' && !obj.data.manned) {
+          // Assumed robotic by default.
+          return true;
+        }
+        return false;
+      });
+    });
+
+    gui.add(uiOptions, 'Private or public', ['both', 'private', 'public']).onChange(function(value) {
+      filterVisibility(function(obj) {
+        if (value === 'both') {
+          return true;
+        }
+        if (value === 'private' && obj.data.private) {
+          return true;
+        }
+        if (value === 'public' && !obj.data.private) {
+          // Assumed govt by default.
           return true;
         }
         return false;
