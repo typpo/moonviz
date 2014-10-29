@@ -296,7 +296,7 @@
     var current = uiOptions['Current missions'];
     var planned = uiOptions['Planned missions'];
 
-    surfaceMarkers.forEach(function(obj) {
+    filterVisibility(function(obj) {
       var visible = false;
       if (past && !obj.data.state) {
         // No state data implies past mission.
@@ -306,7 +306,6 @@
       } else if (planned && obj.data.state === 'PLANNED') {
         visible = true;
       }
-      obj.marker.visible = visible;
     });
   };
 
