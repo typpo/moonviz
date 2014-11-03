@@ -354,10 +354,6 @@
     });
 
     gui.add(uiOptions, 'Reset camera');
-
-
-    // TODO commercial/gvt
-    // TODO human/robotic
   }
 
   function filterVisibility(predicate) {
