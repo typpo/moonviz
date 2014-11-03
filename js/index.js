@@ -74,7 +74,12 @@
       fragmentShader: normFragShader.innerText
     });
 
-    var mesh = new THREE.Mesh(geo, mat);
+    var mesh;
+    if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+      mesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ map: textureMap }));
+    } else {
+      mesh = new THREE.Mesh(geo, mat);
+    }
     mesh.geometry.computeTangents();
     mesh.position.set(0, 0, 0);
     // Hardcoded adjustments to match coordinate system of image map with
