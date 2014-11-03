@@ -51,33 +51,32 @@
     var ySegments = 50;
     var geo = new THREE.SphereGeometry(radius, xSegments, ySegments);
 
-    var mat = new THREE.ShaderMaterial({
-      uniforms: {
-        lightPosition: {
-          type: 'v3',
-          value: light.position
-        },
-        textureMap: {
-          type: 't',
-          value: textureMap
-        },
-        normalMap: {
-          type: 't',
-          value: normalMap
-        },
-        uvScale: {
-          type: 'v2',
-          value: new THREE.Vector2(1.0, 1.0)
-        }
-      },
-      vertexShader: normVertShader.innerText,
-      fragmentShader: normFragShader.innerText
-    });
-
     var mesh;
     if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
       mesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ map: textureMap }));
     } else {
+      var mat = new THREE.ShaderMaterial({
+        uniforms: {
+          lightPosition: {
+            type: 'v3',
+            value: light.position
+          },
+          textureMap: {
+            type: 't',
+            value: textureMap
+          },
+          normalMap: {
+            type: 't',
+            value: normalMap
+          },
+          uvScale: {
+            type: 'v2',
+            value: new THREE.Vector2(1.0, 1.0)
+          }
+        },
+        vertexShader: normVertShader.innerText,
+        fragmentShader: normFragShader.innerText
+      });
       mesh = new THREE.Mesh(geo, mat);
     }
     mesh.geometry.computeTangents();
@@ -89,7 +88,7 @@
     return mesh;
   }
 
-  function createObjects() {
+  function createSurfaceObjects() {
     surfaceMarkers = [];
     for (var i=0; i < LUNAR_DATA.length; i++) {
       (function() {
@@ -209,18 +208,36 @@
     var particle_system_geometry = new THREE.Geometry();
     for (var i = 0; i < added_objects.length; i++) {
       var obj = added_objects[i];
+
+      obj.a = Math.sqrt(obj.a / 1000 * 6);  // squish the semimajor axis
+      obj.i = obj.i - 90; // rotate 90 degrees for this visualization;
+      obj.o = obj.o || 0;
+      if (obj.e > .5) {
+        // Need to exaggerate scale for these, otherwise they pass through the moon object.
+        obj.e = Math.min(.5, obj.e);
+        obj.a *= 1.5;
+      }
+      obj.ma = obj.ma || 0;
+      obj.w = obj.w || Math.random() * 360 - 180;
+      obj.epoch = obj.epoch  || Math.random() * 100000;
+
+      // Add elipse.
+      var orb3d = new Orbit3D(obj, {color: 0xcccccc});
+      var ellipse = orb3d.createOrbit();
+      scene.add(ellipse);
+
+      // Add particle.
       attributes.size.value[i] = 25;
 
-      attributes.a.value[i] = Math.sqrt(obj.a / 1000 * 4);
+      attributes.a.value[i] = obj.a;
       attributes.e.value[i] = obj.e;
-      attributes.i.value[i] = obj.i - 90; // rotate 90 degrees for this visualization
+      attributes.i.value[i] = obj.i;
       attributes.o.value[i] = obj.om || 0;
-      attributes.ma.value[i] = obj.ma || 0;
+      attributes.ma.value[i] = obj.ma;
       attributes.n.value[i] = obj.n || -1.0;
-      attributes.w.value[i] = obj.w_bar ||
-        (obj.w + obj.om) || Math.random() * 360 - 180;
+      attributes.w.value[i] = obj.w;
       attributes.P.value[i] = obj.p;
-      attributes.epoch.value[i] = obj.epoch || Math.random() * 100000;
+      attributes.epoch.value[i] = obj.epoch;
 
       attributes.value_color.value[i] = (function() {
         if (obj.state === 'CURRENT') {
@@ -519,7 +536,7 @@
         var textures = evt.textures;
         moon = createMoon(textures.moon, textures.moonNormal);
         starfield = createSkybox(textures.starfield);
-        createObjects();
+        createSurfaceObjects();
         createParticleSystem();
         createGui();
         animate();
