@@ -43,7 +43,7 @@
   var uniforms, attributes;
   var uiOptions;
 
-  var surfaceMarkers, orbitVisibilityAttributes;
+  var surfaceMarkers, orbitVisibilityAttributes, orbitalEllipses;
 
   function createMoon(textureMap, normalMap) {
     var radius = 100;
@@ -204,7 +204,7 @@
 
     var added_objects = LUNAR_ORBIT_DATA;
     orbitVisibilityAttributes = [];
-
+    orbitalEllipses = [];
     var particle_system_geometry = new THREE.Geometry();
     for (var i = 0; i < added_objects.length; i++) {
       var obj = added_objects[i];
@@ -224,7 +224,9 @@
       // Add elipse.
       var orb3d = new Orbit3D(obj, {color: 0xcccccc});
       var ellipse = orb3d.createOrbit();
+      ellipse.visible = false;
       scene.add(ellipse);
+      orbitalEllipses.push(ellipse);
 
       // Add particle.
       attributes.size.value[i] = 25;
@@ -345,7 +347,11 @@
       });
     });
 
-    gui.add(uiOptions, 'Show orbits', false);
+    gui.add(uiOptions, 'Show orbits', false).onChange(function(value) {
+      orbitalEllipses.forEach(function(ellipse) {
+        ellipse.visible = value;
+      });
+    });
 
     gui.add(uiOptions, 'Reset camera');
 
