@@ -120,7 +120,10 @@
             clearTimeout(mouseTimeout);
             mouseTimeout = null;
           }
-          document.getElementById('center-hud').innerHTML = datum.name;
+          $('#info-container').html(tmpl('surfaceMouseover', {data: datum})).css({
+            top: e.origDomEvent.clientY + 10,
+            left: e.origDomEvent.clientX + 10,
+          }).show();
         }, false);
         domEvents.addEventListener(marker, 'mouseout', function(e) {
           if (mouseTimeout !== null) {
@@ -128,7 +131,7 @@
             mouseTimeout = null;
           }
           mouseTimeout = setTimeout(function() {
-            document.getElementById('center-hud').innerHTML = '';
+            $('#info-container').hide();
             mouseTimeout = null;
           }, 1000);
         }, false);
@@ -291,6 +294,7 @@
         camera.rotation.set(0,0,0);
       },
     };
+    // TODO prevent new filters from overriding old filter options...
     // TODO make sure min year < max year
     gui.add(uiOptions, 'Min year', 1950, 2029).onChange(function(value) {
       filterVisibility(function(obj) {

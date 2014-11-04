@@ -19,15 +19,12 @@
   <!-- Three.JS Container -->
   <div id="container"></div>
 
-  <!-- Overlay HUD -->
-  <div id="hud">
-    <div id="center-hud" class="hud-panel center"></div>
-  </div>
-
   <div id="loading-container">
     <h2>Loading...</h2>
     <p id="loading-message"></p>
   </div>
+
+  <div id="info-container" style="display:none"></div>
 
   <!-- GLSL vertex shader for the moon -->
   <script id="norm-vert-shader" type="x-shader/x-vertex">
@@ -180,7 +177,14 @@
       }
   </script>
 
+  <script id="surfaceMouseover" type="text/template">
+    Name: <%= data.name %><br>
+    Year: <%= data.year %><br>
+    Country: <%= data.country %>
+  </script>
+
   <!-- Include vendor scripts -->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   <script type="text/javascript" src="vendor/three.min.js"></script>
   <script type="text/javascript" src="vendor/TrackballControls.js"></script>
   <script type="text/javascript" src="vendor/detector.min.js"></script>
@@ -188,6 +192,7 @@
   <script type="text/javascript" src="vendor/screenfull.min.js"></script>
   <script type="text/javascript" src="vendor/threex.domevents.js"></script>
   <script type="text/javascript" src="vendor/dat.gui.js"></script>
+  <script type="text/javascript" src="vendor/template.js"></script>
 
   <!-- Include Three.JS scene controller script -->
   <script type="text/javascript" src="js/data.js"></script>
