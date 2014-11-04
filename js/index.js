@@ -112,29 +112,7 @@
         geom.vertices.shift();  // remove center vertex
         var marker = new THREE.Line(geom, new THREE.LineBasicMaterial({color: 0xffff00 }));
        */
-        domEvents.addEventListener(marker, 'click', function(e) {
-          console.log(datum);
-        }, false);
-        domEvents.addEventListener(marker, 'mouseover', function(e) {
-          if (mouseTimeout !== null) {
-            clearTimeout(mouseTimeout);
-            mouseTimeout = null;
-          }
-          $('#info-container').html(tmpl('surfaceMouseover', {data: datum})).css({
-            top: e.origDomEvent.clientY + 10,
-            left: e.origDomEvent.clientX + 10,
-          }).show();
-        }, false);
-        domEvents.addEventListener(marker, 'mouseout', function(e) {
-          if (mouseTimeout !== null) {
-            clearTimeout(mouseTimeout);
-            mouseTimeout = null;
-          }
-          mouseTimeout = setTimeout(function() {
-            $('#info-container').hide();
-            mouseTimeout = null;
-          }, 1000);
-        }, false);
+        addEventHandlersToObject(marker, datum);
         marker.position = vec3;
         scene.add(marker);
         surfaceMarkers.push({
@@ -227,6 +205,7 @@
       // Add elipse.
       var orb3d = new Orbit3D(obj, {color: 0xcccccc});
       var ellipse = orb3d.createOrbit();
+      addEventHandlersToObject(ellipse, obj);
       ellipse.visible = false;
       scene.add(ellipse);
       orbitalEllipses.push(ellipse);
@@ -388,6 +367,35 @@
       return false;
     });
   };
+
+  function addEventHandlersToObject(marker, datum) {
+    domEvents.addEventListener(marker, 'click', function(e) {
+      console.log(datum);
+    }, false);
+    domEvents.addEventListener(marker, 'mouseover', function(e) {
+      if (!marker.visible) {
+        return;
+      }
+      if (mouseTimeout !== null) {
+        clearTimeout(mouseTimeout);
+        mouseTimeout = null;
+      }
+      $('#info-container').html(tmpl('surfaceMouseover', {data: datum})).css({
+        top: e.origDomEvent.clientY + 10,
+        left: e.origDomEvent.clientX + 10,
+      }).show();
+    }, false);
+    domEvents.addEventListener(marker, 'mouseout', function(e) {
+      if (mouseTimeout !== null) {
+        clearTimeout(mouseTimeout);
+        mouseTimeout = null;
+      }
+      mouseTimeout = setTimeout(function() {
+        $('#info-container').hide();
+        mouseTimeout = null;
+      }, 1000);
+    }, false);
+  }
 
   function init() {
     renderer = new THREE.WebGLRenderer({
