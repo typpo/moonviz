@@ -368,12 +368,12 @@
     });
   };
 
-  function addEventHandlersToObject(marker, datum) {
-    domEvents.addEventListener(marker, 'click', function(e) {
+  function addEventHandlersToObject(obj, datum) {
+    domEvents.addEventListener(obj, 'click', function(e) {
       console.log(datum);
     }, false);
-    domEvents.addEventListener(marker, 'mouseover', function(e) {
-      if (!marker.visible) {
+    domEvents.addEventListener(obj, 'mouseover', function(e) {
+      if (!obj.visible) {
         return;
       }
       if (mouseTimeout !== null) {
@@ -385,7 +385,7 @@
         left: e.origDomEvent.clientX + 10,
       }).show();
     }, false);
-    domEvents.addEventListener(marker, 'mouseout', function(e) {
+    domEvents.addEventListener(obj, 'mouseout', function(e) {
       if (mouseTimeout !== null) {
         clearTimeout(mouseTimeout);
         mouseTimeout = null;
