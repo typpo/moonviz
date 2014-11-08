@@ -39,6 +39,7 @@
 
   var domEvents;
   var mouseTimeout = null;
+  var mouseOversEnabled = true;
 
   var uniforms, attributes;
   var uiOptions;
@@ -268,6 +269,7 @@
       'Filter by country': 'all',
       'Human or robotic': 'both',
       'Private or public': 'both',
+      'Mouseovers': mouseOversEnabled,
       'Reset camera': function() {
         camera.position.set(0,0,980);
         camera.rotation.set(0,0,0);
@@ -336,6 +338,10 @@
       });
     });
 
+    gui.add(uiOptions, 'Mouseovers').onChange(function(value) {
+      mouseOversEnabled = value;
+    });
+
     gui.add(uiOptions, 'Reset camera');
   }
 
@@ -373,7 +379,7 @@
       console.log(datum);
     }, false);
     domEvents.addEventListener(marker, 'mouseover', function(e) {
-      if (!marker.visible) {
+      if (!marker.visible || !mouseOversEnabled) {
         return;
       }
       if (mouseTimeout !== null) {
