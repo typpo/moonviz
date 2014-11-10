@@ -275,32 +275,48 @@
         camera.rotation.set(0,0,0);
       },
     };
+    window.uiOptions = uiOptions;
     // TODO prevent new filters from overriding old filter options...
     // TODO make sure min year < max year
     gui.add(uiOptions, 'Min year', 1950, 2029).onChange(function(value) {
+      /*
       filterVisibility(function(obj) {
         return obj.data.year >= value;
       });
+     */
+      runFilters();
     });
     gui.add(uiOptions, 'Max year', 1951, 2030).onChange(function(value) {
+      /*
       filterVisibility(function(obj) {
         return obj.data.year <= value;
       });
+      */
+      runFilters();
     });
     gui.add(uiOptions, 'Speed', 0.0, 1.0);
+    /*
     gui.add(uiOptions, 'Past missions', true).onChange(filterPastCurrentPlanned);
     gui.add(uiOptions, 'Current missions', true).onChange(filterPastCurrentPlanned);
     gui.add(uiOptions, 'Planned missions', true).onChange(filterPastCurrentPlanned);
+   */
+    gui.add(uiOptions, 'Past missions', true).onChange(runFilters);
+    gui.add(uiOptions, 'Current missions', true).onChange(runFilters);
+    gui.add(uiOptions, 'Planned missions', true).onChange(runFilters);
 
     gui.add(uiOptions, 'Filter by country', COUNTRIES).onChange(function(value) {
+      /*
       filterVisibility(function(obj) {
         if (value === 'all')
           return true;
         return obj.data.country === value;
       });
+     */
+      runFilters();
     });
 
     gui.add(uiOptions, 'Human or robotic', ['both', 'human', 'robotic']).onChange(function(value) {
+      /*
       filterVisibility(function(obj) {
         if (value === 'both') {
           return true;
@@ -314,9 +330,12 @@
         }
         return false;
       });
+     */
+      runFilters();
     });
 
     gui.add(uiOptions, 'Private or public', ['both', 'private', 'public']).onChange(function(value) {
+      /*
       filterVisibility(function(obj) {
         if (value === 'both') {
           return true;
@@ -330,6 +349,8 @@
         }
         return false;
       });
+     */
+      runFilters();
     });
 
     gui.add(uiOptions, 'Show orbits', false).onChange(function(value) {
@@ -343,6 +364,23 @@
     });
 
     gui.add(uiOptions, 'Reset camera');
+  }
+
+  function runFilters() {
+    filterVisibility(function(obj) {
+      return obj.data.year >= uiOptions['Min year']
+        && obj.data.year <= uiOptions['Max year']
+        && ((uiOptions['Past missions'] && !obj.data.state)
+          || (uiOptions['Current missions'] && obj.data.state === 'CURRENT')
+          || (uiOptions['Planned missions'] && obj.data.state === 'PLANNED'))
+        && (uiOptions['Filter by country'] === 'all' || uiOptions['Filter by country'] === obj.data.country)
+        && (uiOptions['Human or robotic'] === 'both'
+            || (uiOptions['Human or robotic'] === 'human' && obj.data.manned)
+            || (uiOptions['Human or robotic'] === 'robotic' && !obj.data.manned))
+        && (uiOptions['Private or public'] === 'both'
+            || (uiOptions['Private or public'] === 'private' && obj.data.private)
+            || (uiOptions['Private or public'] === 'public' && !obj.data.private))
+    });
   }
 
   function filterVisibility(predicate) {
