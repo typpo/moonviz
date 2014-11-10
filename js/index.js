@@ -276,9 +276,11 @@
       },
     };
     window.uiOptions = uiOptions;
-    // TODO prevent new filters from overriding old filter options...
-    // TODO make sure min year < max year
     gui.add(uiOptions, 'Min year', 1950, 2029).onChange(function(value) {
+      if (value >= uiOptions['Max year']) {
+        uiOptions['Min year'] = uiOptions['Max year'] - 1;
+        return;
+      }
       /*
       filterVisibility(function(obj) {
         return obj.data.year >= value;
@@ -287,6 +289,10 @@
       runFilters();
     });
     gui.add(uiOptions, 'Max year', 1951, 2030).onChange(function(value) {
+      if (value <= uiOptions['Min year']) {
+        uiOptions['Max year'] = uiOptions['Min year'] + 1;
+        return;
+      }
       /*
       filterVisibility(function(obj) {
         return obj.data.year <= value;
