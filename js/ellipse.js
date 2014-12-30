@@ -1,5 +1,5 @@
 ;(function() {
-  "use strict";
+  'use strict';
 
   var pi = Math.PI, sin = Math.sin, cos = Math.cos;
   var PIXELS_PER_NM = 50;
@@ -20,7 +20,7 @@
     var time = this.opts.jed;
     var pts = [];
     var limit = this.eph.p + 1;
-    var parts = this.eph.e > .20 ? 300 : 100;   // extra precision for high eccentricity
+    var parts = this.eph.e > .20 ? 300 : 100;   // Extra precision for high eccentricity.
     var delta = Math.ceil(limit / parts);
     var prev;
     for (var i=0; i <= parts; i++, time+=delta) {
@@ -32,7 +32,7 @@
 
     points = new THREE.Geometry();
     points.vertices = pts;
-    points.computeLineDistances(); // required for dotted lines
+    points.computeLineDistances(); // Required for dotted lines.
 
     var line = new THREE.Line(points,
       new THREE.LineDashedMaterial({
@@ -45,8 +45,9 @@
   }
 
   Orbit3D.prototype.getPosAtTime = function(jed) {
-    // Note: this must match the vertex shader.
-    // This position calculation is used to follow asteroids in 'lock-on' mode
+    // Note: logic below must match the vertex shader.
+    // This position calculation is used to create orbital ellipses.
+
     var e = this.eph.e;
     var a = this.eph.a;
     var i = (this.eph.i) * pi/180;
@@ -72,10 +73,10 @@
     var E = E0;
     var v = 2 * Math.atan(Math.sqrt((1+e)/(1-e)) * Math.tan(E/2));
 
-    // radius vector, in AU
+    // Radius vector, in AU
     var r = a * (1 - e*e) / (1 + e * cos(v)) * PIXELS_PER_NM;
 
-    // heliocentric coords
+    // Hekliocentric coords
     var X = r * (cos(o) * cos(v + p - o) - sin(o) * sin(v + p - o) * cos(i))
     var Y = r * (sin(o) * cos(v + p - o) + cos(o) * sin(v + p - o) * cos(i))
     var Z = r * (sin(v + p - o) * sin(i))
