@@ -31,7 +31,6 @@
     orbit: function (center, time) {
       this.position.x =
         (center.x + this.distance) * Math.sin(time * -this.speed);
-
       this.position.z =
         (center.z + this.distance) * Math.cos(time * this.speed);
     }
@@ -104,15 +103,10 @@
           }
           return new THREE.MeshBasicMaterial({color: color});
         })();
-        //material.depthTest = true;
-        //material.depthWrite = true;
-        //var geom = new THREE.CircleGeometry(1, 64);
+
         var geom =  new THREE.SphereGeometry(1,64,64);
         var marker = new THREE.Mesh(geom, material);
-        /*
-        geom.vertices.shift();  // remove center vertex
-        var marker = new THREE.Line(geom, new THREE.LineBasicMaterial({color: 0xffff00 }));
-       */
+
         addEventHandlersToObject(marker, datum);
         marker.position = vec3;
         scene.add(marker);
@@ -281,11 +275,6 @@
         uiOptions['Min year'] = uiOptions['Max year'] - 1;
         return;
       }
-      /*
-      filterVisibility(function(obj) {
-        return obj.data.year >= value;
-      });
-     */
       runFilters();
     });
     gui.add(uiOptions, 'Max year', 1951, 2030).onChange(function(value) {
@@ -293,69 +282,22 @@
         uiOptions['Max year'] = uiOptions['Min year'] + 1;
         return;
       }
-      /*
-      filterVisibility(function(obj) {
-        return obj.data.year <= value;
-      });
-      */
       runFilters();
     });
     gui.add(uiOptions, 'Speed', 0.0, 1.0);
-    /*
-    gui.add(uiOptions, 'Past missions', true).onChange(filterPastCurrentPlanned);
-    gui.add(uiOptions, 'Current missions', true).onChange(filterPastCurrentPlanned);
-    gui.add(uiOptions, 'Planned missions', true).onChange(filterPastCurrentPlanned);
-   */
     gui.add(uiOptions, 'Past missions', true).onChange(runFilters);
     gui.add(uiOptions, 'Current missions', true).onChange(runFilters);
     gui.add(uiOptions, 'Planned missions', true).onChange(runFilters);
 
     gui.add(uiOptions, 'Filter by country', COUNTRIES).onChange(function(value) {
-      /*
-      filterVisibility(function(obj) {
-        if (value === 'all')
-          return true;
-        return obj.data.country === value;
-      });
-     */
       runFilters();
     });
 
     gui.add(uiOptions, 'Human or robotic', ['both', 'human', 'robotic']).onChange(function(value) {
-      /*
-      filterVisibility(function(obj) {
-        if (value === 'both') {
-          return true;
-        }
-        if (value === 'human' && obj.data.manned) {
-          return true;
-        }
-        if (value === 'robotic' && !obj.data.manned) {
-          // Assumed robotic by default.
-          return true;
-        }
-        return false;
-      });
-     */
       runFilters();
     });
 
     gui.add(uiOptions, 'Private or public', ['both', 'private', 'public']).onChange(function(value) {
-      /*
-      filterVisibility(function(obj) {
-        if (value === 'both') {
-          return true;
-        }
-        if (value === 'private' && obj.data.private) {
-          return true;
-        }
-        if (value === 'public' && !obj.data.private) {
-          // Assumed govt by default.
-          return true;
-        }
-        return false;
-      });
-     */
       runFilters();
     });
 
@@ -379,7 +321,8 @@
         && ((uiOptions['Past missions'] && !obj.data.state)
           || (uiOptions['Current missions'] && obj.data.state === 'CURRENT')
           || (uiOptions['Planned missions'] && obj.data.state === 'PLANNED'))
-        && (uiOptions['Filter by country'] === 'all' || uiOptions['Filter by country'] === obj.data.country)
+        && (uiOptions['Filter by country'] === 'all'
+            || uiOptions['Filter by country'] === obj.data.country)
         && (uiOptions['Human or robotic'] === 'both'
             || (uiOptions['Human or robotic'] === 'human' && obj.data.manned)
             || (uiOptions['Human or robotic'] === 'robotic' && !obj.data.manned))
@@ -420,7 +363,7 @@
 
   function addEventHandlersToObject(obj, datum) {
     domEvents.addEventListener(obj, 'click', function(e) {
-      console.log(datum);
+      // console.log(datum);
     }, false);
     domEvents.addEventListener(obj, 'mouseover', function(e) {
       if (!obj.visible || !mouseOversEnabled) {
@@ -469,17 +412,10 @@
     scene.add(camera);
 
     window.cam = camera;
-//
+
     controls = new THREE.TrackballControls(camera, renderer.domElement);
     controls.rotateSpeed = 0.5;
     controls.dynamicDampingFactor = 0.5;
-
-    /*
-    stats = new Stats();
-    stats.domElement.style.position = 'absolute';
-    stats.domElement.style.bottom = '0px';
-    hud.appendChild(stats.domElement);
-    */
 
     clock = new THREE.Clock();
     domEvents = new THREEx.DomEvents(camera, renderer.domElement)
@@ -488,12 +424,10 @@
   function animate() {
     requestAnimationFrame(animate);
     light.orbit(moon.position, clock.getElapsedTime());
-    //light.orbit(moon.position, 0);
     controls.update(camera);
-    //stats.update();
     renderer.render(scene, camera);
 
-    // jed
+    // Update time of simulation.
     uniforms.jed.value += uiOptions['Speed'];
   }
 
@@ -610,36 +544,36 @@
     init();
   }
 
+  // Convert the positions from a lat, lon to a position on a sphere.
+  function latLongToVector3(lat, lon, radius, height) {
+    var phi = (lat)*Math.PI/180;
+    var theta = (lon+90)*Math.PI/180;
+
+    var x = -(radius+height) * Math.cos(phi) * Math.cos(theta);
+    var y = (radius+height) * Math.sin(phi);
+    var z = (radius+height) * Math.cos(phi) * Math.sin(theta);
+
+    return new THREE.Vector3(x,y,z);
+  }
+
+  function loadTexture(path) {
+    if (typeof passthrough_vars !== 'undefined' && passthrough_vars.offline_mode) {
+      // Same origin policy workaround.
+      var b64_data = $('img[data-src="' + path + '"]').attr('src');
+
+      var new_image = document.createElement( 'img' );
+      var texture = new THREE.Texture( new_image );
+      new_image.onload = function()  {
+        texture.needsUpdate = true;
+      };
+      new_image.src = b64_data;
+      return texture;
+    }
+    return THREE.ImageUtils.loadTexture(path);
+  }
+
   /** Window load event kicks off execution */
   window.addEventListener('load', onWindowLoaded, false);
   window.addEventListener('resize', onWindowResize, false);
-  //document.addEventListener('keydown', onDocumentKeyDown, false);
+  // document.addEventListener('keydown', onDocumentKeyDown, false);
 })();
-
-// convert the positions from a lat, lon to a position on a sphere.
-function latLongToVector3(lat, lon, radius, height) {
-  var phi = (lat)*Math.PI/180;
-  var theta = (lon+90)*Math.PI/180;
-
-  var x = -(radius+height) * Math.cos(phi) * Math.cos(theta);
-  var y = (radius+height) * Math.sin(phi);
-  var z = (radius+height) * Math.cos(phi) * Math.sin(theta);
-
-  return new THREE.Vector3(x,y,z);
-}
-
-function loadTexture(path) {
-  if (typeof passthrough_vars !== 'undefined' && passthrough_vars.offline_mode) {
-    // same origin policy workaround
-    var b64_data = $('img[data-src="' + path + '"]').attr('src');
-
-    var new_image = document.createElement( 'img' );
-    var texture = new THREE.Texture( new_image );
-    new_image.onload = function()  {
-      texture.needsUpdate = true;
-    };
-    new_image.src = b64_data;
-    return texture;
-  }
-  return THREE.ImageUtils.loadTexture(path);
-}
